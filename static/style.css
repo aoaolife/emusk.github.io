@@ -1,0 +1,910 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    border: 6px solid #1d9bf0;
+    min-height: 100vh;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 修复导航栏对齐问题 */
+.nav {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+
+.nav a {
+    color: #1d9bf0;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.content-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin-right: 20px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    color: #1d9bf0;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #1d9bf0;
+    padding-bottom: 10px;
+}
+
+.tree-container {
+    font-size: 14px;
+}
+
+.tree-item {
+    margin: 2px 0;
+}
+
+.tree-node {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.tree-node:hover {
+    background-color: rgba(29, 155, 240, 0.1);
+}
+
+.tree-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tree-toggle {
+    flex: 1;
+    color: #1d9bf0;
+    font-weight: 500;
+    user-select: none;
+}
+
+.tree-link {
+    flex: 1;
+    color: #1d9bf0;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.tree-link:hover {
+    text-decoration: underline;
+}
+
+.tree-arrow {
+    color: #1d9bf0;
+    font-size: 10px;
+    margin-left: 4px;
+    transition: transform 0.2s ease;
+}
+
+.tree-item.expanded .tree-arrow {
+    transform: rotate(90deg);
+}
+
+.tree-children {
+    margin-left: 24px;
+    display: none;
+    border-left: 1px solid rgba(29, 155, 240, 0.2);
+    padding-left: 8px;
+    position: relative;
+}
+
+.tree-children::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(29, 155, 240, 0.3), transparent);
+}
+
+.tree-item.expanded .tree-children {
+    display: block;
+}
+
+.file-item .tree-node {
+    padding-left: 12px;
+}
+
+.file-item .tree-icon {
+    opacity: 0.8;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    margin: 0 0 20px 0;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    border-radius: 16px;
+}
+
+.current-time {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1d9bf0;
+    margin-bottom: 15px;
+}
+
+.progress-container {
+    background-color: #f0f2f5;
+    border: 2px solid #1d9bf0;
+    border-radius: 10px;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #1d9bf0;
+    transition: width 0.3s ease;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.progress-text {
+    position: relative;
+    z-index: 2;
+    color: #333;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.item {
+    border: 2px solid #1d9bf0;
+    border-radius: 24px;
+    padding: 20px 24px;
+    margin: 0 auto 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    text-align: left;
+    font-size: 28px;
+    font-weight: 400;
+    color: #1d9bf0;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
+    max-width: 800px;
+}
+
+.item:hover {
+    background-color: rgba(29, 155, 240, 0.03);
+    transform: translateY(-2px);
+}
+
+.article-title {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.article-title a {
+    color: #1d9bf0;
+    text-decoration: none;
+}
+
+.article-title a:hover {
+    text-decoration: underline;
+}
+
+.item .content {
+    text-align: left;
+    margin: 10px 0;
+    flex: 1;
+    font-size: 18px;
+}
+
+.item .content img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+.more-link {
+    color: #1d9bf0;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.more-link:hover {
+    text-decoration: underline;
+}
+
+.more-articles {
+    text-align: center;
+    margin: 30px auto 0 auto;
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.more-articles-link {
+    color: #1d9bf0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 8px 15px;
+    border: 2px solid #1d9bf0;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+    transition: all 0.2s ease;
+}
+
+.more-articles-link:hover {
+    background-color: rgba(29, 155, 240, 0.03);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.prev-articles {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.prev-articles-link {
+    color: #1d9bf0;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #1d9bf0;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
+}
+
+.prev-articles-link:hover {
+    background-color: rgba(29, 155, 240, 0.03);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.article-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f2f5;
+    font-size: 14px;
+    color: #536471;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+}
+
+.meta-divider {
+    color: #cfd9de;
+    user-select: none;
+}
+
+/* 首页列表专用的轻量化点赞样式 */
+.index-like-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.index-like-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+    outline: none;
+}
+
+.index-like-btn:hover {
+    color: #ff4757;
+}
+
+.index-share-btn:hover {
+    color: #1d9bf0;
+}
+
+.index-like-btn.liked {
+    color: #ff4757;
+}
+
+/* 回到顶部按钮 */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background-color: #1d9bf0;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: none;
+    font-size: 20px;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: #0a6db7;
+}
+
+/* 图片灯箱 (Lightbox) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: zoom-out;
+}
+
+.lightbox-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.lightbox-overlay.show .lightbox-img {
+    transform: scale(1);
+}
+
+.content img {
+    cursor: zoom-in;
+}
+.item-detail .like-section-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eff3f4;
+}
+
+.article-footer .more-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1d9bf0;
+}
+
+.article-footer .date {
+    font-size: 16px;
+    color: #1d9bf0;
+    margin-left: auto;
+    text-align: right;
+}
+
+.copyright {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    color: #1d9bf0;
+    font-weight: 400;
+    text-align: center;
+    margin: 20px auto 0;
+    max-width: 800px;
+}
+
+.nickname {
+    align-self: flex-end;
+    margin-top: auto;
+    font-size: 18px;
+    color: #1d9bf0;
+    width: 100%;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.date {
+    font-size: 16px;
+    color: #1d9bf0;
+}
+
+.nav-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #1d9bf0;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #1d9bf0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-arrow-left {
+    left: 15px;
+}
+
+.nav-arrow-right {
+    right: 15px;
+}
+
+.nav-arrow:hover {
+    color: #0a6db7;
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-52%);
+}
+
+/* 社交按钮样式 */
+.social-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-icon {
+    display: inline-block;
+    margin: 10px 15px;
+    color: #1d9bf0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.social-icon i {
+    margin-right: 8px;
+    font-size: 32px;
+}
+
+.social-icon:hover {
+    color: #0a6db7;
+    transform: translateY(-2px);
+}
+
+/* 扫码二维码样式 */
+.qrcode-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qrcode-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.qrcode-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qrcode-img {
+    width: 160px;
+    height: 160px;
+    border: 2px solid #1d9bf0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.qrcode-img:hover {
+    transform: scale(1.05);
+}
+
+.qrcode-item p {
+    margin: 0;
+    font-size: 16px;
+    color: #1d9bf0;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        border-width: 4px;
+    }
+
+    /* 移动端导航栏也需要调整 - 方案3 */
+    .nav {
+        width: 100%;
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .content-wrapper {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-height: 300px;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .item {
+        font-size: 20px;
+        padding: 15px 18px;
+    }
+
+    .article-title {
+        font-size: 24px;
+    }
+
+    .current-time {
+        font-size: 20px;
+    }
+
+    .progress-text {
+        font-size: 16px;
+    }
+
+    .progress-container {
+        height: 50px;
+    }
+
+    .nav-arrow {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        top: 70%;
+        border-width: 1px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-arrow-left {
+        left: 8px;
+    }
+
+    .nav-arrow-right {
+        right: 8px;
+    }
+
+    .nav-arrow:hover {
+        transform: translateY(-72%);
+    }
+
+    .item .content {
+        font-size: 16px;
+    }
+
+    .more-articles-link {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+
+    .prev-articles-link {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    .social-icon {
+        font-size: 16px;
+        margin: 8px 10px;
+    }
+
+    .social-icon i {
+        font-size: 18px;
+    }
+
+    .qrcode-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .qrcode-container {
+        gap: 20px;
+    }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+        border-width: 3px;
+    }
+
+    .nav-arrow {
+        font-size: 10px;
+        padding: 3px 6px;
+        border-radius: 4px;
+        top: 75%;
+    }
+
+    .nav-arrow-left {
+        left: 5px;
+    }
+
+    .nav-arrow-right {
+        right: 5px;
+    }
+
+    .nav-arrow:hover {
+        transform: translateY(-77%);
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .item {
+        font-size: 18px;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+    }
+
+    .article-title {
+        font-size: 20px;
+    }
+
+    .current-time {
+        font-size: 18px;
+    }
+
+    .progress-text {
+        font-size: 14px;
+    }
+
+    .progress-container {
+        height: 40px;
+    }
+
+    .social-icon {
+        font-size: 14px;
+        margin: 6px 8px;
+    }
+
+    .social-icon i {
+        font-size: 16px;
+    }
+
+    .qrcode-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .qrcode-container {
+        gap: 15px;
+    }
+}
+
+/* 确保侧边栏显示 */
+.sidebar {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.content-wrapper {
+    display: flex !important;
+}
+
+/* 分页导航容器 */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.pagination-container .prev-articles,
+.pagination-container .more-articles {
+    margin: 0;
+    padding: 0;
+}
+
+/* 移动端分页导航优化 */
+@media (max-width: 768px) {
+    .pagination-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* 文章页面全宽样式 */
+.full-width {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 32px;       /* 与 .article-title 一致 */
+    font-weight: 600;      /* 与 .article-title 一致 */
+    color: #1d9bf0;        /* 与 .article-title 一致 */
+    margin-bottom: 15px;   /* 与 .article-title 的 margin-bottom 一致 */
+    text-align: center;    /* 与 .article-title 一致 */
+}
+
+/* 点赞功能全局样式 - 基础（小尺寸） */
+.like-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    user-select: none;
+    width: 100%;
+}
+
+.like-btn, .copy-btn, .share-btn {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #536471;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    outline: none;
+    line-height: 1.2;
+}
+
+.like-btn:hover, .copy-btn:hover, .share-btn:hover {
+    background-color: #f9f9f9;
+    border-color: #1d9bf0;
+    color: #1d9bf0;
+}
+
+.like-btn.liked {
+    border-color: #ff4757;
+    color: #ff4757;
+    background-color: #fff0f1;
+}
+
+.heart-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+/* 详情页底部的大型按钮容器 */
+.item-detail .like-section-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eff3f4;
+    gap: 20px;
+}
+
+/* 仅针对底部容器内的大按钮 */
+.like-section-container .like-btn, 
+.like-section-container .share-btn {
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.like-section-container .heart-icon {
+    font-size: 20px;
+}
+
+/* 首页/顶部元数据行的简约样式（覆盖基础样式） */
+.index-like-btn, .index-share-btn, .index-copy-btn {
+    background: #ffffff;
+    border: 1px solid #1d9bf0;
+    color: #1d9bf0;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.index-like-btn:hover, .index-share-btn:hover, .index-copy-btn:hover {
+    background: #1d9bf0;
+    color: #ffffff;
+}

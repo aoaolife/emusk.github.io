@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的言论朋友圈 - 马斯克中文日记</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            color: #0f1419; /* Twitter black */
+        }
+
+        /* Animations */
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: 22.2%; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* 顶部 Header */
+        .title-header {
+            width: 100%;
+            background: #fff;
+            border-radius: 16px 16px 0 0;
+            padding: 15px 25px;
+            margin-bottom: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .header-top-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+        
+        /* Ensure logo stays left */
+        .header-top-row > .logo-text {
+            justify-self: start;
+        }
+
+        .header-nav {
+            justify-self: center;
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: #536471;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        .header-nav a:hover { color: #1d9bf0; }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1d9bf0;
+            white-space: nowrap;
+            text-decoration: none; 
+        }
+        .logo-text:hover { opacity: 0.8; }
+
+        .header-search {
+            justify-self: end;
+            width: 250px; 
+            position: relative;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 1px solid #eff3f4;
+            background: #eff3f4;
+            border-radius: 9999px;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .search-box:focus {
+            background: #fff;
+            border-color: #1d9bf0;
+            box-shadow: 0 0 0 1px #1d9bf0;
+        }
+        .search-results {
+            margin-top: 5px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            display: none;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f7f9f9;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background-color: #f7f9f9;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            background-color: #eff3f4;
+            border: none;
+            border-radius: 15px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #1d9bf0;
+            animation: fillProgress 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .progress-text {
+            position: relative;
+            z-index: 2;
+            color: #0f1419;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 0 0 10px rgba(255,255,255,0.9);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .sidebar-title { 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            color: #1d9bf0;
+            font-weight: 800;
+        }
+        .tree-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        /* 目录树文字颜色 */
+        .tree-container h3 { color: #1d9bf0; }
+        .tree-node { color: #1d9bf0; cursor: pointer; font-weight: 500; }
+        .tree-item a { color: #1d9bf0; text-decoration: none; }
+        .tree-arrow { color: #1d9bf0; }
+
+        /* 目录树交互 */
+        .tree-children { display: none; margin-left: 20px; }
+        .tree-item.expanded .tree-children { display: block; }
+        .tree-arrow { transition: transform 0.3s; display: inline-block; }
+        .tree-item.expanded .tree-arrow { transform: rotate(90deg); }
+
+        /* 主内容 */
+        .main-content {
+            flex-grow: 1;
+            min-width: 0; /* Crucial for text wrapping in Flexbox */
+            width: 100%; /* Fallback */
+        }
+
+        /* 文章卡片 */
+        .item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #eff3f4;
+            font-family: inherit;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .item-body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .item .content {
+            flex: 1;
+            text-align: justify;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            /* 列表页取消首行缩进，更现代 */
+            text-indent: 0;
+            /* Force Wrap */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            min-width: 0; /* Fix flex overflow */
+        }
+        .item .content img {
+            display: none; /* Hide images in snippet */
+        }
+        
+        .article-title {
+            text-align: center; /* 列表页居中 */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .article-title a { 
+            text-decoration: none; 
+            color: #1d9bf0;
+            font-weight: 700;
+        }
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .article-thumbnail {
+            width: 240px;
+            height: 160px;
+            flex-shrink: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            background-color: #f7f9f9;
+        }
+        .article-thumbnail img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center;
+            transition: transform 0.3s ease; 
+        }
+        .article-thumbnail:hover img { transform: scale(1.05); }
+
+        .article-footer { 
+            font-size: 14px; 
+            color: #536471; 
+            margin-top: 15px;
+            border-top: 1px solid #f7f9f9;
+            padding-top: 12px;
+            display: flex;
+            justify-content: center; /* 底部对齐居中 */
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+        .footer-nav { margin-bottom: 15px; }
+        .footer-nav a {
+            color: #536471;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+        .footer-nav a:hover { color: #1d9bf0; }
+        .copyright { font-size: 0.9em; color: #999; }
+        .copyright a { color: #1d9bf0; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .content-wrapper { flex-direction: column; }
+            .sidebar { width: 100%; order: 2; }
+            .header-top-row {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .header-search {
+                width: 100%;
+                max-width: none;
+            }
+            .progress-text { font-size: 12px; }
+            .progress-container { height: 30px; }
+            
+            /* Mobile Card Layout */
+            .item-body {
+                flex-direction: column-reverse; /* Image on top for mobile, or below? Let's put image below text or above? usually top is better, but column-reverse puts last element (img) on top? No, HTML order: Content(1), Img(2). column-reverse -> Img top, Content bottom */
+            }
+            .article-thumbnail {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Header -->
+        <div class="title-header">
+            <div class="header-top-row">
+                <a href="/index.html" class="logo-text">我的言论朋友圈 - 马斯克中文日记</a>
+                                                <div class="header-nav">
+                                                    <a href="/index.html">主页 (emusk.cn)</a>
+                                                    <a href="/about.html">关于我</a>
+                                                    <a href="/clocklife.html">马斯克生命时钟</a>
+                                                </div>                <div class="header-search">
+                    <input type="text" id="searchBox" class="search-box" placeholder="🔍 搜索文章...">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 22.2%;"></div>
+                <div class="progress-text">今天 2026.03.22 | 已耗 22.2% · 剩 284 天</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-title">目录</div>
+            <div class="tree-container">
+                
+                
+                    
+                        
+                            
+                            
+                            <div class="tree-item expanded">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">马斯克中文日记 (97)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            
+                            
+                            <div class="tree-item ">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">马斯克2026年日程日记 (68)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260321.html">📄 大家好，我是马斯克，今天是2026年03月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260320.html">📄 大家好，我是马斯克，今天是2026年03月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260319.html">📄 大家好，我是马斯克，今天是2026年03月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260318.html">📄 大家好，我是马斯克，今天是2026年03月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260317.html">📄 大家好，我是马斯克，今天是2026年03月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260316.html">📄 大家好，我是马斯克，今天是2026年03月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260315.html">📄 大家好，我是马斯克，今天是2026年03月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260314.html">📄 大家好，我是马斯克，今天是2026年03月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260313.html">📄 大家好，我是马斯克，今天是2026年03月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260312.html">📄 大家好，我是马斯克，今天是2026年03月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260311.html">📄 大家好，我是马斯克，今天是2026年03月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260310.html">📄 大家好，我是马斯克，今天是2026年03月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260308.html">📄 大家好，我是马斯克，今天是2026年03月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260306.html">📄 大家好，我是马斯克，今天是2026年03月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260309.html">📄 大家好，我是马斯克，今天是2026年03月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260305.html">📄 大家好，我是马斯克，今天是2026年03月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260307.html">📄 大家好，我是马斯克，今天是2026年03月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260303.html">📄 大家好，我是马斯克，今天是2026年03月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260302.html">📄 大家好，我是马斯克，今天是2026年03月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260301.html">📄 大家好，我是马斯克，今天是2026年03月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260228.html">📄 大家好，我是马斯克，今天是2026年02月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260227.html">📄 大家好，我是马斯克，今天是2026年02月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260226.html">📄 大家好，我是马斯克，今天是2026年02月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260220.html">📄 大家好，我是马斯克，今天是2026年02月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260221.html">📄 大家好，我是马斯克，今天是2026年02月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260222.html">📄 大家好，我是马斯克，今天是2026年02月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260223.html">📄 大家好，我是马斯克，今天是2026年02月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260224.html">📄 大家好，我是马斯克，今天是2026年02月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260225.html">📄 大家好，我是马斯克，今天是2026年02月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260219.html">📄 大家好，我是马斯克，今天是2026年02月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260218.html">📄 大家好，我是马斯克，今天是2026年02月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260217.html">📄 大家好，我是马斯克，今天是2026年02月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260216.html">📄 大家好，我是马斯克，今天是2026年02月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260215.html">📄 大家好，我是马斯克，今天是2026年02月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260214.html">📄 大家好，我是马斯克，今天是2026年02月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260213-1.html">📄 大家好，我是马斯克，今天是2026年02月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260212-1.html">📄 大家好，我是马斯克，今天是2026年02月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260211.html">📄 大家好，我是马斯克，今天是2026年02月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260210.html">📄 大家好，我是马斯克，今天是2026年02月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260209.html">📄 大家好，我是马斯克，今天是2026年02月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260208.html">📄 大家好，我是马斯克，今天是2026年02月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260207.html">📄 大家好，我是马斯克，今天是2026年02月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260206.html">📄 大家好，我是马斯克，今天是2026年02月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205.html">📄 大家好，我是马斯克，今天是2026年02月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260203.html">📄 大家好，我是马斯克，今天是2026年02月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260204.html">📄 大家好，我是马斯克，今天是2026年02月04日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260202.html">📄 大家好，我是马斯克，今天是2026年02月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260201.html">📄 大家好，我是马斯克，今天是2026年02月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-1.html">📄 大家好，我是马斯克，今天是2026年01月31日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130.html">📄 大家好，我是马斯克，今天是2026年01月30日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260129.html">📄 大家好，我是马斯克，今天是2026年01月29日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128.html">📄 大家好，我是马斯克，今天是2026年01月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127-2.html">📄 大家好，我是马斯克，今天是2026年01月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260126.html">📄 大家好，我是马斯克，今天是2026年01月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260125.html">📄 大家好，我是马斯克，今天是2026年01月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260122.html">📄 大家好，我是马斯克，今天是2026年01月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260123.html">📄 大家好，我是马斯克，今天是2026年01月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124.html">📄 大家好，我是马斯克，今天是2026年01月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260113.html">📄 大家好，我是马斯克，今天是2026年01月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260114.html">📄 大家好，我是马斯克，今天是2026年01月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260115.html">📄 大家好，我是马斯克，今天是2026年01月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260116.html">📄 大家好，我是马斯克今天是2026年01月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260117.html">📄 大家好，我是马斯克，今天是2026年01月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260118.html">📄 大家好，我是马斯克，今天是2026年01月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260119.html">📄 大家好，我是马斯克，今天是2026年01月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260120.html">📄 大家好，我是马斯克，今天是2026年01月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260121.html">📄 大家好，我是马斯克，今天是2026年01月21日.md</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260112.html">📄 大家好，我是马斯克，今天是2026年01月12日</a>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                        
+                            
+                            
+                            <div class="tree-item expanded">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">我的言论朋友圈 (29)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260302-1.html">📄 没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260220-1.html">📄 那年我付不起修车费用，买了了几乎所有旧车零件自己修车</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260215-1.html">📄 今天情人节，建议你们生娃，没有什么比生娃更快乐的了</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260214-1.html">📄 我不是个商人，我是个工程师</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260213.html">📄 好多人说我害怕跟中国车企竞争，你们太小看我了</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260212.html">📄 五岁马斯克的惊人坚持</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260210-1.html">📄 生活不应该只有一件件悲伤的事一定还有很多兴奋的事</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260209-1.html">📄 17岁我独自一个到美国不知道未来会怎么样</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260208-1.html">📄 当年我上大学的时候，我还开过夜总会</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260207-1.html">📄 我妈妈说我小时候很喜欢哭</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260206-1.html">📄 我们正在建造大量的机器人，然后让它们自己互相学习</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205-1.html">📄 现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205-2.html">📄 突然有点感慨金钱买不到幸福</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260202-1.html">📄 我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260201-1.html">📄 不久的将来，我们每个人都会有一个机器人。——emusk.cn</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131.html">📄 前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-2.html">📄 现在整个中国好像是我说什么他们就加紧做什么。。。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-3.html">📄 宗教信仰跟生娃关系</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130-1.html">📄 我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130-2.html">📄 生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260129-1.html">📄 95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-1.html">📄 所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-2.html">📄 最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-3.html">📄 我是个爱折腾的人，小时候我搞过很多事</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127.html">📄 直视恐惧，它就会消失</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127-1.html">📄 有时候我觉得我也是个非常厉害的思想家</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260126-1.html">📄 渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124-1.html">📄 我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124-2.html">📄 领导者的职责是为人民服务，而不是让人民为领导者服务</a>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                
+            </div>
+
+            <!-- aoao推荐 (Native Ad Slot) -->
+            
+        </div>
+
+        <div class="main-content">
+            <!-- 面包屑导航 (For Category Pages) -->
+            
+            <nav class="breadcrumb-nav" style="margin-bottom: 20px; font-size: 14px; color: #536471; background: #fff; padding: 12px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eff3f4;">
+                
+                    
+                        <a href="/index.html" style="color: #1d9bf0; text-decoration: none; font-weight: 700;">首页</a>
+                    
+                    
+                        <span style="margin: 0 8px; opacity: 0.5;">&gt;</span>
+                    
+                
+                    
+                        <span style="color: #0f1419; font-weight: 700;">我的言论朋友圈</span>
+                    
+                    
+                
+            </nav>
+            
+
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260302-1.html">没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好。    —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260302-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202603021314.webp" alt="没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年03月02日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好" 
+                                    data-url="https://emusk.cn/20260302-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260302-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好" 
+                                        data-url="https://emusk.cn/20260302-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年03月02日 13:15</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260220-1.html">那年我付不起修车费用，买了了几乎所有旧车零件自己修车</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">那年我付不起修车费用，所以几乎把车上的所有零件都从废车场淘来了。自己修车，碎的侧窗玻璃也自己换。      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260220-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602200946.webp" alt="那年我付不起修车费用，买了了几乎所有旧车零件自己修车" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月20日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="那年我付不起修车费用，买了了几乎所有旧车零件自己修车" 
+                                    data-url="https://emusk.cn/20260220-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260220-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="那年我付不起修车费用，买了了几乎所有旧车零件自己修车" 
+                                        data-url="https://emusk.cn/20260220-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月20日 09:51</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260215-1.html">今天情人节，建议你们生娃，没有什么比生娃更快乐的了</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">今年情人节，你的目标应该是生孩子。   “我觉得没有什么比孩子更能让人快乐了，孩子是我最大的快乐源泉。我真心鼓励我所有的朋友都生孩子。”      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260215-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602150012.webp" alt="今天情人节，建议你们生娃，没有什么比生娃更快乐的了" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月15日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="今天情人节，建议你们生娃，没有什么比生娃更快乐的了" 
+                                    data-url="https://emusk.cn/20260215-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260215-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="今天情人节，建议你们生娃，没有什么比生娃更快乐的了" 
+                                        data-url="https://emusk.cn/20260215-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月15日 11:25</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260214-1.html">我不是个商人，我是个工程师</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我其实不是商人，我是工程师。我喜欢工程和设计。我不关注投资回报率，我创造新技术。科技是世界上最接近魔法的东西。    —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260214-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602141800.webp" alt="我不是个商人，我是个工程师" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月14日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我不是个商人，我是个工程师" 
+                                    data-url="https://emusk.cn/20260214-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260214-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我不是个商人，我是个工程师" 
+                                        data-url="https://emusk.cn/20260214-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月14日 20:26</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260213.html">好多人说我害怕跟中国车企竞争，你们太小看我了</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">最近我停产了Model S 和 Model X 两种车型，好多人说我竞争不过中国电车，害怕跟中国车企竞争。我想说我们太小看我了。   电车已经很成熟了，对我来说太没挑战了。这不是我想做的事，我又不差钱。   我就是想干点不一样的，没人干过的，为人类贡献更多新技术。   我要搞定AI，搞定机器人，很多很多的机器人，然后不是随便跟造玩具车一样，1秒钟生产一台，然后都是完全自动驾驶的。我说过很多次以后T...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260213.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602132024.webp" alt="好多人说我害怕跟中国车企竞争，你们太小看我了" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月13日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="好多人说我害怕跟中国车企竞争，你们太小看我了" 
+                                    data-url="https://emusk.cn/20260213.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260213.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="好多人说我害怕跟中国车企竞争，你们太小看我了" 
+                                        data-url="https://emusk.cn/20260213.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月13日 22:17</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260212.html">五岁马斯克的惊人坚持</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我五岁时，有次表弟举办生日派对，但因为我打架被惩罚，被告知待在家里。我是个非常坚定的孩子，决定自己走到表哥家。   问题是它位于比勒陀利亚的另一边，步行近两个小时。而且，我还太小，看不懂路标。   “我大概知道路线长什么样，因为我从车里看到过，我决心要去那里，所以我就开始走路了，”我说。   我赶在派对快结束时赶到。   当我妈妈看到我走过来时，她吓坏了。害怕再次受罚，我爬上一棵枫树拒绝下去。  ...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260212.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602122223.webp" alt="五岁马斯克的惊人坚持" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月12日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="五岁马斯克的惊人坚持" 
+                                    data-url="https://emusk.cn/20260212.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260212.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="五岁马斯克的惊人坚持" 
+                                        data-url="https://emusk.cn/20260212.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月12日 22:36</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260210-1.html">生活不应该只有一件件悲伤的事一定还有很多兴奋的事</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我将建造一个允许任何人登月的系统。酷不酷？    —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260210-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602092342.webp" alt="生活不应该只有一件件悲伤的事一定还有很多兴奋的事" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月10日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="生活不应该只有一件件悲伤的事一定还有很多兴奋的事" 
+                                    data-url="https://emusk.cn/20260210-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260210-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="生活不应该只有一件件悲伤的事一定还有很多兴奋的事" 
+                                        data-url="https://emusk.cn/20260210-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月10日 10:32</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260209-1.html">17岁我独自一个到美国不知道未来会怎么样</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">17岁我独自一个到美国不知道未来会怎么样，独自一人带着2000美元抵达蒙特利尔。   没有支持，没有联系人，什么都没有。父亲说我会挂科，三个月后会回来。      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260209-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602091244.webp" alt="17岁我独自一个到美国不知道未来会怎么样" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月09日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="17岁我独自一个到美国不知道未来会怎么样" 
+                                    data-url="https://emusk.cn/20260209-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260209-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="17岁我独自一个到美国不知道未来会怎么样" 
+                                        data-url="https://emusk.cn/20260209-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月09日 12:47</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260208-1.html">当年我上大学的时候，我还开过夜总会</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">在宾夕法尼亚大学就读期间，我和室友Adeo Ressi一起租了一栋10卧室的房子，我们将其改造成夜总会，通过收取5美元入场费来支付房租。   有时一场派对就能赚够一个月的租金。       —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260208-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602081541.webp" alt="当年我上大学的时候，我还开过夜总会" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月08日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="当年我上大学的时候，我还开过夜总会" 
+                                    data-url="https://emusk.cn/20260208-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260208-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="当年我上大学的时候，我还开过夜总会" 
+                                        data-url="https://emusk.cn/20260208-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月08日 15:50</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260207-1.html">我妈妈说我小时候很喜欢哭</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我妈妈说我小时候很喜欢哭，有一次甚至不管我，让我哭到自然睡。第二天被领居投诉。    —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260207-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-2026020720051.webp" alt="我妈妈说我小时候很喜欢哭" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月07日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我妈妈说我小时候很喜欢哭" 
+                                    data-url="https://emusk.cn/20260207-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260207-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我妈妈说我小时候很喜欢哭" 
+                                        data-url="https://emusk.cn/20260207-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月07日 20:08</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260206-1.html">我们正在建造大量的机器人，然后让它们自己互相学习</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">跟Tesla一样使用我们现实生成器系统，精确的现实行为学习系统。使用大量机器人互相学习缩小模拟与现实之间的差距。    —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260206-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-02602061342.webp" alt="我们正在建造大量的机器人，然后让它们自己互相学习" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月06日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我们正在建造大量的机器人，然后让它们自己互相学习" 
+                                    data-url="https://emusk.cn/20260206-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260206-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我们正在建造大量的机器人，然后让它们自己互相学习" 
+                                        data-url="https://emusk.cn/20260206-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月06日 13:47</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260205-1.html">现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260205-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602051835.jpg" alt="现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月05日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的" 
+                                    data-url="https://emusk.cn/20260205-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260205-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的" 
+                                        data-url="https://emusk.cn/20260205-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月05日 19:06</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260205-2.html">突然有点感慨金钱买不到幸福</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 突然有点感慨金钱买不到幸福，虽然我现在真的是世界上最有钱的人，而且是历史上最有钱的，比第二名多好几倍，我对环境的贡献比地球上任何一个人都多，但是我好像也不像你们想像的幸福。   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260205-2.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602042217.jpg" alt="突然有点感慨金钱买不到幸福" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月05日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="突然有点感慨金钱买不到幸福" 
+                                    data-url="https://emusk.cn/20260205-2.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260205-2.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="突然有点感慨金钱买不到幸福" 
+                                        data-url="https://emusk.cn/20260205-2.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月05日 18:52</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260202-1.html">我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过。   我并不恨任何人。非常关心帮助人类，并将竭尽所能去帮助。   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260202-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202602022318.webp" alt="我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月02日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过" 
+                                    data-url="https://emusk.cn/20260202-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260202-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过" 
+                                        data-url="https://emusk.cn/20260202-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月02日 23:35</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260201-1.html">不久的将来，我们每个人都会有一个机器人。——emusk.cn</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">     我们会制造很我机器人，然后机器人会制造出更多机器人，很快比人还多。地球上的每个人都会拥有一个，可以帮照顾你的孩子，照顾你的宠物呢，照顾年迈的父母，我觉得那会很棒，那将是一件了不起的事情。我认为我们会拥有这些东西。”   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260201-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-20260201194.webp" alt="不久的将来，我们每个人都会有一个机器人。——emusk.cn" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年02月01日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="不久的将来，我们每个人都会有一个机器人。——emusk.cn" 
+                                    data-url="https://emusk.cn/20260201-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260201-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="不久的将来，我们每个人都会有一个机器人。——emusk.cn" 
+                                        data-url="https://emusk.cn/20260201-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月01日 19:51</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260131.html">前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">没有人比我更努力推动公开爱泼斯坦档案，我很高兴这终于实现了。   我与爱泼斯坦通信极少，多次拒绝邀请去他的岛上或乘坐他的“洛丽塔快车”，但我很清楚与他的一些邮件通信可能会被误解，被批评者用来抹黑我。   我不在乎这些，但我关心的是，我们至少应该尝试起诉那些与爱普斯坦一起犯下严重罪行的人，尤其是关于对未成年女孩的恶劣剥削。      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260131.html">
+                                    <img src="https://img.aoao.life/apst002.webp" alt="前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月31日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆" 
+                                    data-url="https://emusk.cn/20260131.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260131.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆" 
+                                        data-url="https://emusk.cn/20260131.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年02月01日 00:02</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260131-2.html">现在整个中国好像是我说什么他们就加紧做什么。。。</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260131-2.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601271846.webp" alt="现在整个中国好像是我说什么他们就加紧做什么。。。" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月31日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="现在整个中国好像是我说什么他们就加紧做什么。。。" 
+                                    data-url="https://emusk.cn/20260131-2.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260131-2.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="现在整个中国好像是我说什么他们就加紧做什么。。。" 
+                                        data-url="https://emusk.cn/20260131-2.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月31日 19:55</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260131-3.html">宗教信仰跟生娃关系</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我觉得宗教信仰越虔诚、教育程度越低、收入越低，生育率就越高。而宗教信仰程度低、教育程度高、收入高的地区，生育率最低。      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260131-3.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601302302.webp" alt="宗教信仰跟生娃关系" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月31日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="宗教信仰跟生娃关系" 
+                                    data-url="https://emusk.cn/20260131-3.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260131-3.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="宗教信仰跟生娃关系" 
+                                        data-url="https://emusk.cn/20260131-3.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月31日 11:49</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260130-1.html">我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260130-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601292003.webp" alt="我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月30日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?" 
+                                    data-url="https://emusk.cn/20260130-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260130-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?" 
+                                        data-url="https://emusk.cn/20260130-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月30日 23:17</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260130-2.html">生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260130-2.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601291737.webp" alt="生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月30日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。" 
+                                    data-url="https://emusk.cn/20260130-2.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260130-2.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。" 
+                                        data-url="https://emusk.cn/20260130-2.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月30日 22:46</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260129-1.html">95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260129-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601291644.webp" alt="95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月29日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。" 
+                                    data-url="https://emusk.cn/20260129-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260129-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。" 
+                                        data-url="https://emusk.cn/20260129-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月29日 16:45</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260128-1.html">所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 特斯拉车主可以将你们的汽车添加到 我们Robotaxi 网络中，你们平时车不用的时候，可以让车自己出去挣钱，不过我们将收取 25% 的收入。   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260128-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601281650.webp" alt="所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月28日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱" 
+                                    data-url="https://emusk.cn/20260128-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260128-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱" 
+                                        data-url="https://emusk.cn/20260128-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月28日 16:54</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260128-2.html">最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260128-2.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601271812.webp" alt="最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月28日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到" 
+                                    data-url="https://emusk.cn/20260128-2.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260128-2.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到" 
+                                        data-url="https://emusk.cn/20260128-2.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月28日 15:55</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260128-3.html">我是个爱折腾的人，小时候我搞过很多事</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 我小时候做过模型飞机、火车模型、火箭（自己配制火药）、炸药（我居然手指都还在，真是有点惊讶）、收音机，还开发过很多软件。   大学的时候还组装过一台简易的核磁共振成像仪。   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260128-3.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601281453.webp" alt="我是个爱折腾的人，小时候我搞过很多事" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月28日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我是个爱折腾的人，小时候我搞过很多事" 
+                                    data-url="https://emusk.cn/20260128-3.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260128-3.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我是个爱折腾的人，小时候我搞过很多事" 
+                                        data-url="https://emusk.cn/20260128-3.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月28日 14:55</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260127.html">直视恐惧，它就会消失</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">直视恐惧，它就会消失   —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260127.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601212332.webp" alt="直视恐惧，它就会消失" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月27日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="直视恐惧，它就会消失" 
+                                    data-url="https://emusk.cn/20260127.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260127.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="直视恐惧，它就会消失" 
+                                        data-url="https://emusk.cn/20260127.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月27日 18:32</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260127-1.html">有时候我觉得我也是个非常厉害的思想家</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 世界上有很多负面的事情。世界各地时时刻刻都在发生很多可怕的事情。有很多问题需要解决，很多事情令人痛苦，让人难以承受.   但生活不能仅仅是解决一个又一个令人头疼的问题。这不应该是生活的全部。生活中需要一些能激励你、让你每天早上醒来都感到快乐、让你为成为人类的一份子而感到欣慰的事情。   这就是我们创办SpaceX的原因。一位名叫齐奥尔科夫斯基的人，他是早期的俄罗斯火箭科学家之一，他有一句名言：“...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260127-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601270013.webp" alt="有时候我觉得我也是个非常厉害的思想家" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月27日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="有时候我觉得我也是个非常厉害的思想家" 
+                                    data-url="https://emusk.cn/20260127-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260127-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="有时候我觉得我也是个非常厉害的思想家" 
+                                        data-url="https://emusk.cn/20260127-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月27日 17:53</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260126-1.html">渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。      —— emusk.cn </div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260126-1.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601181134.webp" alt="渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月26日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。" 
+                                    data-url="https://emusk.cn/20260126-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260126-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。" 
+                                        data-url="https://emusk.cn/20260126-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月26日 17:15</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260124-1.html">我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。   —— aoao.life </div>
+                        
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月24日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。" 
+                                    data-url="https://emusk.cn/20260124-1.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260124-1.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。" 
+                                        data-url="https://emusk.cn/20260124-1.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月25日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260124-2.html">领导者的职责是为人民服务，而不是让人民为领导者服务</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">领导者的职责是为人民服务，而不是让人民为领导者服务   —— emusk.cn </div>
+                        
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月24日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="领导者的职责是为人民服务，而不是让人民为领导者服务" 
+                                    data-url="https://emusk.cn/20260124-2.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260124-2.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="领导者的职责是为人民服务，而不是让人民为领导者服务" 
+                                        data-url="https://emusk.cn/20260124-2.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月25日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+
+            <div class="pagination-container">
+                
+
+                
+            </div>
+        </div>
+    </div>
+    
+            <div class="footer">
+    
+                <div class="footer-nav">
+    
+                    <a href="/index.html">主页 (emusk.cn)</a> |
+    
+                    <a href="/about.html">关于我</a> |
+    
+                    <a href="/clocklife.html">马斯克生命时钟</a>
+    
+                </div>        <div class="copyright"><a href="https://aoao.life">BY: aoao.life</a></div>
+    </div>
+
+    <script>
+        window.allArticles = [];
+    </script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+</body>
+</html>
