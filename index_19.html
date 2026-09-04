@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马斯克中文日记</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            color: #0f1419; /* Twitter black */
+        }
+
+        /* Animations */
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: 67.7%; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* 顶部 Header */
+        .title-header {
+            width: 100%;
+            background: #fff;
+            border-radius: 16px 16px 0 0;
+            padding: 15px 25px;
+            margin-bottom: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .header-top-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+        
+        /* Ensure logo stays left */
+        .header-top-row > .logo-text {
+            justify-self: start;
+        }
+
+        .header-nav {
+            justify-self: center;
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: #536471;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        .header-nav a:hover { color: #1d9bf0; }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1d9bf0;
+            white-space: nowrap;
+            text-decoration: none; 
+        }
+        .logo-text:hover { opacity: 0.8; }
+
+        .header-search {
+            justify-self: end;
+            width: 250px; 
+            position: relative;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 1px solid #eff3f4;
+            background: #eff3f4;
+            border-radius: 9999px;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .search-box:focus {
+            background: #fff;
+            border-color: #1d9bf0;
+            box-shadow: 0 0 0 1px #1d9bf0;
+        }
+        .search-results {
+            margin-top: 5px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            display: none;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f7f9f9;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background-color: #f7f9f9;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            background-color: #eff3f4;
+            border: none;
+            border-radius: 15px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #1d9bf0;
+            animation: fillProgress 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+        .progress-text {
+            position: relative;
+            z-index: 2;
+            color: #0f1419;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 0 0 10px rgba(255,255,255,0.9);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+        .sidebar-title { 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            color: #1d9bf0;
+            font-weight: 800;
+        }
+        .tree-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        /* 目录树文字颜色 */
+        .tree-container h3 { color: #1d9bf0; }
+        .tree-node { color: #1d9bf0; cursor: pointer; font-weight: 500; }
+        .tree-item a { color: #1d9bf0; text-decoration: none; }
+        .tree-arrow { color: #1d9bf0; }
+
+        /* 目录树交互 */
+        .tree-children { display: none; margin-left: 20px; }
+        .tree-item.expanded .tree-children { display: block; }
+        .tree-arrow { transition: transform 0.3s; display: inline-block; }
+        .tree-item.expanded .tree-arrow { transform: rotate(90deg); }
+
+        /* 主内容 */
+        .main-content {
+            flex-grow: 1;
+            min-width: 0; /* Crucial for text wrapping in Flexbox */
+            width: 100%; /* Fallback */
+        }
+
+        /* 文章卡片 */
+        .item {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #eff3f4;
+            font-family: inherit;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .item-body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .item .content {
+            flex: 1;
+            text-align: justify;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            /* 列表页取消首行缩进，更现代 */
+            text-indent: 0;
+            /* Force Wrap */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            min-width: 0; /* Fix flex overflow */
+        }
+        .item .content img {
+            display: none; /* Hide images in snippet */
+        }
+        
+        .article-title {
+            text-align: center; /* 列表页居中 */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .article-title a { 
+            text-decoration: none; 
+            color: #1d9bf0;
+            font-weight: 700;
+        }
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .article-thumbnail {
+            width: 240px;
+            height: 160px;
+            flex-shrink: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            background-color: #f7f9f9;
+        }
+        .article-thumbnail img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center;
+            transition: transform 0.3s ease; 
+        }
+        .article-thumbnail:hover img { transform: scale(1.05); }
+
+        .article-footer { 
+            font-size: 14px; 
+            color: #536471; 
+            margin-top: 15px;
+            border-top: 1px solid #f7f9f9;
+            padding-top: 12px;
+            display: flex;
+            justify-content: center; /* 底部对齐居中 */
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+        .footer-nav { margin-bottom: 15px; }
+        .footer-nav a {
+            color: #536471;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+        .footer-nav a:hover { color: #1d9bf0; }
+        .copyright { font-size: 0.9em; color: #999; }
+        .copyright a { color: #1d9bf0; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .content-wrapper { flex-direction: column; }
+            .sidebar { width: 100%; order: 2; }
+            .header-top-row {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .header-search {
+                width: 100%;
+                max-width: none;
+            }
+            .progress-text { font-size: 12px; }
+            .progress-container { height: 30px; }
+            
+            /* Mobile Card Layout */
+            .item-body {
+                flex-direction: column-reverse; /* Image on top for mobile, or below? Let's put image below text or above? usually top is better, but column-reverse puts last element (img) on top? No, HTML order: Content(1), Img(2). column-reverse -> Img top, Content bottom */
+            }
+            .article-thumbnail {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Header -->
+        <div class="title-header">
+            <div class="header-top-row">
+                <a href="/index.html" class="logo-text">马斯克中文日记</a>
+                                                <div class="header-nav">
+                                                    <a href="/index.html">主页 (emusk.cn)</a>
+                                                    <a href="/about.html">关于我</a>
+                                                    <a href="/clocklife.html">马斯克生命时钟</a>
+                                                </div>                <div class="header-search">
+                    <input type="text" id="searchBox" class="search-box" placeholder="🔍 搜索文章...">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 67.7%;"></div>
+                <div class="progress-text">今天 2026.09.04 | 已耗 67.7% · 剩 118 天</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-title">目录</div>
+            <div class="tree-container">
+                
+                
+                    
+                        
+                            
+                            
+                            <div class="tree-item expanded">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">马斯克中文日记 (184)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            
+                            
+                            <div class="tree-item ">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">马斯克2026年日程日记 (155)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260617.html" class="tree-link" data-search-path="20260617.html">📄 大家好，我是马斯克，今天是2026年06月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260616.html" class="tree-link" data-search-path="20260616.html">📄 大家好，我是马斯克，今天是2026年06月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260615.html" class="tree-link" data-search-path="20260615.html">📄 大家好，我是马斯克，今天是2026年06月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260614.html" class="tree-link" data-search-path="20260614.html">📄 大家好，我是马斯克，今天是2026年06月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260613.html" class="tree-link" data-search-path="20260613.html">📄 大家好，我是马斯克，今天是2026年06月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260612.html" class="tree-link" data-search-path="20260612.html">📄 大家好，我是马斯克，今天是2026年06月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260611.html" class="tree-link" data-search-path="20260611.html">📄 大家好，我是马斯克，今天是2026年06月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260610.html" class="tree-link" data-search-path="20260610.html">📄 大家好，我是马斯克，今天是2026年06月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260608.html" class="tree-link" data-search-path="20260608.html">📄 大家好，我是马斯克，今天是2026年06月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260607.html" class="tree-link" data-search-path="20260607.html">📄 大家好，我是马斯克，今天是2026年06月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260606.html" class="tree-link" data-search-path="20260606.html">📄 大家好，我是马斯克，今天是2026年06月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260605.html" class="tree-link" data-search-path="20260605.html">📄 大家好，我是马斯克，今天是2026年06月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260604.html" class="tree-link" data-search-path="20260604.html">📄 大家好，我是马斯克，今天是2026年06月04日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260603.html" class="tree-link" data-search-path="20260603.html">📄 大家好，我是马斯克，今天是2026年06月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260601.html" class="tree-link" data-search-path="20260601.html">📄 大家好，我是马斯克，今天是2026年06月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260531.html" class="tree-link" data-search-path="20260531.html">📄 大家好，我是马斯克，今天是2026年05月31日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260530.html" class="tree-link" data-search-path="20260530.html">📄 大家好，我是马斯克，今天是2026年05月30日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260529.html" class="tree-link" data-search-path="20260529.html">📄 大家好，我是马斯克，今天是2026年05月29日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260528.html" class="tree-link" data-search-path="20260528.html">📄 大家好，我是马斯克，今天是2026年05月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260527.html" class="tree-link" data-search-path="20260527.html">📄 大家好，我是马斯克，今天是2026年05月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260526.html" class="tree-link" data-search-path="20260526.html">📄 大家好，我是马斯克，今天是2026年05月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260525.html" class="tree-link" data-search-path="20260525.html">📄 大家好，我是马斯克，今天是2026年05月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260524.html" class="tree-link" data-search-path="20260524.html">📄 大家好，我是马斯克，今天是2026年05月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260523.html" class="tree-link" data-search-path="20260523.html">📄 大家好，我是马斯克，今天是2026年05月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260522.html" class="tree-link" data-search-path="20260522.html">📄 大家好，我是马斯克，今天是2026年05月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260521.html" class="tree-link" data-search-path="20260521.html">📄 大家好，我是马斯克，今天是2026年05月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260520.html" class="tree-link" data-search-path="20260520.html">📄 大家好，我是马斯克，今天是2026年05月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260519.html" class="tree-link" data-search-path="20260519.html">📄 大家好，我是马斯克，今天是2026年05月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260518.html" class="tree-link" data-search-path="20260518.html">📄 大家好，我是马斯克，今天是2026年05月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260517.html" class="tree-link" data-search-path="20260517.html">📄 大家好，我是马斯克，今天是2026年05月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260516.html" class="tree-link" data-search-path="20260516.html">📄 大家好，我是马斯克，今天是2026年05月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260515.html" class="tree-link" data-search-path="20260515.html">📄 大家好，我是马斯克，今天是2026年05月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260514.html" class="tree-link" data-search-path="20260514.html">📄 大家好，我是马斯克，今天是2026年05月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260513.html" class="tree-link" data-search-path="20260513.html">📄 大家好，我是马斯克，今天是2026年05月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260512.html" class="tree-link" data-search-path="20260512.html">📄 大家好，我是马斯克，今天是2026年05月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260511.html" class="tree-link" data-search-path="20260511.html">📄 大家好，我是马斯克，今天是2026年05月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260510.html" class="tree-link" data-search-path="20260510.html">📄 大家好，我是马斯克，今天是2026年05月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260509.html" class="tree-link" data-search-path="20260509.html">📄 大家好，我是马斯克，今天是2026年05月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260508.html" class="tree-link" data-search-path="20260508.html">📄 大家好，我是马斯克，今天是2026年05月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260507.html" class="tree-link" data-search-path="20260507.html">📄 大家好，我是马斯克，今天是2026年05月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260506.html" class="tree-link" data-search-path="20260506.html">📄 大家好，我是马斯克，今天是2026年05月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260505.html" class="tree-link" data-search-path="20260505.html">📄 大家好，我是马斯克，今天是2026年05月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260504.html" class="tree-link" data-search-path="20260504.html">📄 大家好，我是马斯克，今天是2026年05月04日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260503.html" class="tree-link" data-search-path="20260503.html">📄 大家好，我是马斯克，今天是2026年05月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260502.html" class="tree-link" data-search-path="20260502.html">📄 大家好，我是马斯克，今天是2026年05月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260501.html" class="tree-link" data-search-path="20260501.html">📄 大家好，我是马斯克，今天是2026年05月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260429.html" class="tree-link" data-search-path="20260429.html">📄 大家好，我是马斯克，今天是2026年04月29日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260430.html" class="tree-link" data-search-path="20260430.html">📄 大家好，我是马斯克，今天是2026年04月30日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260428.html" class="tree-link" data-search-path="20260428.html">📄 大家好，我是马斯克，今天是2026年04月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260427.html" class="tree-link" data-search-path="20260427.html">📄 大家好，我是马斯克，今天是2026年04月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260426.html" class="tree-link" data-search-path="20260426.html">📄 大家好，我是马斯克，今天是2026年04月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260425.html" class="tree-link" data-search-path="20260425.html">📄 大家好，我是马斯克，今天是2026年04月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260424.html" class="tree-link" data-search-path="20260424.html">📄 大家好，我是马斯克，今天是2026年04月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260423.html" class="tree-link" data-search-path="20260423.html">📄 大家好，我是马斯克，今天是2026年04月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260422.html" class="tree-link" data-search-path="20260422.html">📄 大家好，我是马斯克，今天是2026年04月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260421.html" class="tree-link" data-search-path="20260421.html">📄 大家好，我是马斯克，今天是2026年04月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260420.html" class="tree-link" data-search-path="20260420.html">📄 大家好，我是马斯克，今天是2026年04月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260419.html" class="tree-link" data-search-path="20260419.html">📄 大家好，我是马斯克，今天是2026年04月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260418.html" class="tree-link" data-search-path="20260418.html">📄 大家好，我是马斯克，今天是2026年04月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260417.html" class="tree-link" data-search-path="20260417.html">📄 大家好，我是马斯克，今天是2026年04月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260416.html" class="tree-link" data-search-path="20260416.html">📄 大家好，我是马斯克，今天是2026年04月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260415.html" class="tree-link" data-search-path="20260415.html">📄 大家好，我是马斯克，今天是2026年04月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260414.html" class="tree-link" data-search-path="20260414.html">📄 大家好，我是马斯克，今天是2026年04月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260413.html" class="tree-link" data-search-path="20260413.html">📄 大家好，我是马斯克，今天是2026年04月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260412.html" class="tree-link" data-search-path="20260412.html">📄 大家好，我是马斯克，今天是2026年04月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260411.html" class="tree-link" data-search-path="20260411.html">📄 大家好，我是马斯克，今天是2026年04月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260410.html" class="tree-link" data-search-path="20260410.html">📄 大家好，我是马斯克，今天是2026年04月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260409.html" class="tree-link" data-search-path="20260409.html">📄 大家好，我是马斯克，今天是2026年04月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260408.html" class="tree-link" data-search-path="20260408.html">📄 大家好，我是马斯克，今天是2026年04月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260407.html" class="tree-link" data-search-path="20260407.html">📄 大家好，我是马斯克，今天是2026年04月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260406.html" class="tree-link" data-search-path="20260406.html">📄 大家好，我是马斯克，今天是2026年04月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260405.html" class="tree-link" data-search-path="20260405.html">📄 大家好，我是马斯克，今天是2026年04月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260404.html" class="tree-link" data-search-path="20260404.html">📄 大家好，我是马斯克，今天是2026年04月04日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260403.html" class="tree-link" data-search-path="20260403.html">📄 大家好，我是马斯克，今天是2026年04月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260402.html" class="tree-link" data-search-path="20260402.html">📄 大家好，我是马斯克，今天是2026年04月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260401.html" class="tree-link" data-search-path="20260401.html">📄 大家好，我是马斯克，今天是2026年04月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260327.html" class="tree-link" data-search-path="20260327.html">📄 大家好，我是马斯克，今天是2026年03月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260331.html" class="tree-link" data-search-path="20260331.html">📄 大家好，我是马斯克，今天是2026年03月31日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260330.html" class="tree-link" data-search-path="20260330.html">📄 大家好，我是马斯克，今天是2026年03月30日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260329.html" class="tree-link" data-search-path="20260329.html">📄 大家好，我是马斯克，今天是2026年03月29日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260328.html" class="tree-link" data-search-path="20260328.html">📄 大家好，我是马斯克，今天是2026年03月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260326.html" class="tree-link" data-search-path="20260326.html">📄 大家好，我是马斯克，今天是2026年03月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260325.html" class="tree-link" data-search-path="20260325.html">📄 大家好，我是马斯克，今天是2026年03月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260324.html" class="tree-link" data-search-path="20260324.html">📄 大家好，我是马斯克，今天是2026年03月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260323.html" class="tree-link" data-search-path="20260323.html">📄 大家好，我是马斯克，今天是2026年03月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260322.html" class="tree-link" data-search-path="20260322.html">📄 大家好，我是马斯克，今天是2026年03月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260111.html" class="tree-link" data-search-path="20260111.html">📄 大家好，我是马斯克，今天是2026年01月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260321.html" class="tree-link" data-search-path="20260321.html">📄 大家好，我是马斯克，今天是2026年03月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260320.html" class="tree-link" data-search-path="20260320.html">📄 大家好，我是马斯克，今天是2026年03月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260319.html" class="tree-link" data-search-path="20260319.html">📄 大家好，我是马斯克，今天是2026年03月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260318.html" class="tree-link" data-search-path="20260318.html">📄 大家好，我是马斯克，今天是2026年03月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260317.html" class="tree-link" data-search-path="20260317.html">📄 大家好，我是马斯克，今天是2026年03月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260316.html" class="tree-link" data-search-path="20260316.html">📄 大家好，我是马斯克，今天是2026年03月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260315.html" class="tree-link" data-search-path="20260315.html">📄 大家好，我是马斯克，今天是2026年03月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260314.html" class="tree-link" data-search-path="20260314.html">📄 大家好，我是马斯克，今天是2026年03月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260313.html" class="tree-link" data-search-path="20260313.html">📄 大家好，我是马斯克，今天是2026年03月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260312.html" class="tree-link" data-search-path="20260312.html">📄 大家好，我是马斯克，今天是2026年03月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260311.html" class="tree-link" data-search-path="20260311.html">📄 大家好，我是马斯克，今天是2026年03月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260310.html" class="tree-link" data-search-path="20260310.html">📄 大家好，我是马斯克，今天是2026年03月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260308.html" class="tree-link" data-search-path="20260308.html">📄 大家好，我是马斯克，今天是2026年03月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260306.html" class="tree-link" data-search-path="20260306.html">📄 大家好，我是马斯克，今天是2026年03月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260309.html" class="tree-link" data-search-path="20260309.html">📄 大家好，我是马斯克，今天是2026年03月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260305.html" class="tree-link" data-search-path="20260305.html">📄 大家好，我是马斯克，今天是2026年03月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260307.html" class="tree-link" data-search-path="20260307.html">📄 大家好，我是马斯克，今天是2026年03月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260303.html" class="tree-link" data-search-path="20260303.html">📄 大家好，我是马斯克，今天是2026年03月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260302.html" class="tree-link" data-search-path="20260302.html">📄 大家好，我是马斯克，今天是2026年03月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260301.html" class="tree-link" data-search-path="20260301.html">📄 大家好，我是马斯克，今天是2026年03月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260228.html" class="tree-link" data-search-path="20260228.html">📄 大家好，我是马斯克，今天是2026年02月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260227.html" class="tree-link" data-search-path="20260227.html">📄 大家好，我是马斯克，今天是2026年02月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260226.html" class="tree-link" data-search-path="20260226.html">📄 大家好，我是马斯克，今天是2026年02月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260220.html" class="tree-link" data-search-path="20260220.html">📄 大家好，我是马斯克，今天是2026年02月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260221.html" class="tree-link" data-search-path="20260221.html">📄 大家好，我是马斯克，今天是2026年02月21日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260222.html" class="tree-link" data-search-path="20260222.html">📄 大家好，我是马斯克，今天是2026年02月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260223.html" class="tree-link" data-search-path="20260223.html">📄 大家好，我是马斯克，今天是2026年02月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260224.html" class="tree-link" data-search-path="20260224.html">📄 大家好，我是马斯克，今天是2026年02月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260225.html" class="tree-link" data-search-path="20260225.html">📄 大家好，我是马斯克，今天是2026年02月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260219.html" class="tree-link" data-search-path="20260219.html">📄 大家好，我是马斯克，今天是2026年02月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260218.html" class="tree-link" data-search-path="20260218.html">📄 大家好，我是马斯克，今天是2026年02月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260217.html" class="tree-link" data-search-path="20260217.html">📄 大家好，我是马斯克，今天是2026年02月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260216.html" class="tree-link" data-search-path="20260216.html">📄 大家好，我是马斯克，今天是2026年02月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260215.html" class="tree-link" data-search-path="20260215.html">📄 大家好，我是马斯克，今天是2026年02月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260214.html" class="tree-link" data-search-path="20260214.html">📄 大家好，我是马斯克，今天是2026年02月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260213-1.html" class="tree-link" data-search-path="20260213-1.html">📄 大家好，我是马斯克，今天是2026年02月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260212-1.html" class="tree-link" data-search-path="20260212-1.html">📄 大家好，我是马斯克，今天是2026年02月12日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260211.html" class="tree-link" data-search-path="20260211.html">📄 大家好，我是马斯克，今天是2026年02月11日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260210.html" class="tree-link" data-search-path="20260210.html">📄 大家好，我是马斯克，今天是2026年02月10日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260209.html" class="tree-link" data-search-path="20260209.html">📄 大家好，我是马斯克，今天是2026年02月09日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260208.html" class="tree-link" data-search-path="20260208.html">📄 大家好，我是马斯克，今天是2026年02月08日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260207.html" class="tree-link" data-search-path="20260207.html">📄 大家好，我是马斯克，今天是2026年02月07日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260206.html" class="tree-link" data-search-path="20260206.html">📄 大家好，我是马斯克，今天是2026年02月06日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205.html" class="tree-link" data-search-path="20260205.html">📄 大家好，我是马斯克，今天是2026年02月05日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260203.html" class="tree-link" data-search-path="20260203.html">📄 大家好，我是马斯克，今天是2026年02月03日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260204.html" class="tree-link" data-search-path="20260204.html">📄 大家好，我是马斯克，今天是2026年02月04日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260202.html" class="tree-link" data-search-path="20260202.html">📄 大家好，我是马斯克，今天是2026年02月02日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260201.html" class="tree-link" data-search-path="20260201.html">📄 大家好，我是马斯克，今天是2026年02月01日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-1.html" class="tree-link" data-search-path="20260131-1.html">📄 大家好，我是马斯克，今天是2026年01月31日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130.html" class="tree-link" data-search-path="20260130.html">📄 大家好，我是马斯克，今天是2026年01月30日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260129.html" class="tree-link" data-search-path="20260129.html">📄 大家好，我是马斯克，今天是2026年01月29日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128.html" class="tree-link" data-search-path="20260128.html">📄 大家好，我是马斯克，今天是2026年01月28日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127-2.html" class="tree-link" data-search-path="20260127-2.html">📄 大家好，我是马斯克，今天是2026年01月27日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260126.html" class="tree-link" data-search-path="20260126.html">📄 大家好，我是马斯克，今天是2026年01月26日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260125.html" class="tree-link" data-search-path="20260125.html">📄 大家好，我是马斯克，今天是2026年01月25日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260122.html" class="tree-link" data-search-path="20260122.html">📄 大家好，我是马斯克，今天是2026年01月22日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260123.html" class="tree-link" data-search-path="20260123.html">📄 大家好，我是马斯克，今天是2026年01月23日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124.html" class="tree-link" data-search-path="20260124.html">📄 大家好，我是马斯克，今天是2026年01月24日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260113.html" class="tree-link" data-search-path="20260113.html">📄 大家好，我是马斯克，今天是2026年01月13日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260114.html" class="tree-link" data-search-path="20260114.html">📄 大家好，我是马斯克，今天是2026年01月14日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260115.html" class="tree-link" data-search-path="20260115.html">📄 大家好，我是马斯克，今天是2026年01月15日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260116.html" class="tree-link" data-search-path="20260116.html">📄 大家好，我是马斯克今天是2026年01月16日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260117.html" class="tree-link" data-search-path="20260117.html">📄 大家好，我是马斯克，今天是2026年01月17日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260118.html" class="tree-link" data-search-path="20260118.html">📄 大家好，我是马斯克，今天是2026年01月18日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260119.html" class="tree-link" data-search-path="20260119.html">📄 大家好，我是马斯克，今天是2026年01月19日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260120.html" class="tree-link" data-search-path="20260120.html">📄 大家好，我是马斯克，今天是2026年01月20日</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260121.html" class="tree-link" data-search-path="20260121.html">📄 大家好，我是马斯克，今天是2026年01月21日.md</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260112.html" class="tree-link" data-search-path="20260112.html">📄 大家好，我是马斯克，今天是2026年01月12日</a>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                        
+                            
+                            
+                            <div class="tree-item ">
+                                <div class="tree-node">
+                                    <span class="tree-icon">📁</span>
+                                    <span class="tree-toggle">我的言论朋友圈 (29)</span>
+                                    <span class="tree-arrow">▶</span>
+                                </div>
+                                <div class="tree-children">
+                                    
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260302-1.html" class="tree-link" data-search-path="20260302-1.html">📄 没有哪个国家是完美的，但客观来说，迪拜和整个阿联酋比欧洲很多地区更安全、管理得更好</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260220-1.html" class="tree-link" data-search-path="20260220-1.html">📄 那年我付不起修车费用，买了了几乎所有旧车零件自己修车</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260215-1.html" class="tree-link" data-search-path="20260215-1.html">📄 今天情人节，建议你们生娃，没有什么比生娃更快乐的了</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260214-1.html" class="tree-link" data-search-path="20260214-1.html">📄 我不是个商人，我是个工程师</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260213.html" class="tree-link" data-search-path="20260213.html">📄 好多人说我害怕跟中国车企竞争，你们太小看我了</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260212.html" class="tree-link" data-search-path="20260212.html">📄 五岁马斯克的惊人坚持</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260210-1.html" class="tree-link" data-search-path="20260210-1.html">📄 生活不应该只有一件件悲伤的事一定还有很多兴奋的事</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260209-1.html" class="tree-link" data-search-path="20260209-1.html">📄 17岁我独自一个到美国不知道未来会怎么样</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260208-1.html" class="tree-link" data-search-path="20260208-1.html">📄 当年我上大学的时候，我还开过夜总会</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260207-1.html" class="tree-link" data-search-path="20260207-1.html">📄 我妈妈说我小时候很喜欢哭</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260206-1.html" class="tree-link" data-search-path="20260206-1.html">📄 我们正在建造大量的机器人，然后让它们自己互相学习</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205-1.html" class="tree-link" data-search-path="20260205-1.html">📄 现在每建一座数据中心就要对应建一座发电厂，但是建发电厂还是有点难度的</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260205-2.html" class="tree-link" data-search-path="20260205-2.html">📄 突然有点感慨金钱买不到幸福</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260202-1.html" class="tree-link" data-search-path="20260202-1.html">📄 我不再怎么看传统媒体的宣传文章了。那纯粹是浪费时间，只会让人难过</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260201-1.html" class="tree-link" data-search-path="20260201-1.html">📄 不久的将来，我们每个人都会有一个机器人。——emusk.cn</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131.html" class="tree-link" data-search-path="20260131.html">📄 前段时间我只是说了比尔盖茨也经常上萝莉岛，没想到他还把梅毒带回家，传给老婆</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-2.html" class="tree-link" data-search-path="20260131-2.html">📄 现在整个中国好像是我说什么他们就加紧做什么。。。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260131-3.html" class="tree-link" data-search-path="20260131-3.html">📄 宗教信仰跟生娃关系</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130-1.html" class="tree-link" data-search-path="20260130-1.html">📄 我准备把我的公司SpaceX、xAI、Tesla合并，叫什么呢？叫马斯克集团？Musk Corp ? Musk Group?</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260130-2.html" class="tree-link" data-search-path="20260130-2.html">📄 生孩子是对未来的投票。如果你打算要孩子，那说明你关心未来。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260129-1.html" class="tree-link" data-search-path="20260129-1.html">📄 95年末，我和金巴尔几乎每天晚上都在埃尔卡米诺的杰克快餐店吃晚饭。几年前有人食物中毒身亡，所以价格很低。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-1.html" class="tree-link" data-search-path="20260128-1.html">📄 所有的特斯拉车主，你们平时车不用的时候，可以让车自己出去挣钱</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-2.html" class="tree-link" data-search-path="20260128-2.html">📄 最近苹果找我们合作，准备把星链集成的Iphone,明年你们就应该能见到</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260128-3.html" class="tree-link" data-search-path="20260128-3.html">📄 我是个爱折腾的人，小时候我搞过很多事</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127.html" class="tree-link" data-search-path="20260127.html">📄 直视恐惧，它就会消失</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260127-1.html" class="tree-link" data-search-path="20260127-1.html">📄 有时候我觉得我也是个非常厉害的思想家</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260126-1.html" class="tree-link" data-search-path="20260126-1.html">📄 渴望被人喜欢是一种真正的弱点，一种真正的弱点，而我没有这种弱点。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124-1.html" class="tree-link" data-search-path="20260124-1.html">📄 我有点讨厌浪费时间。如果我和你交谈，发现你提供的信息毫无用处，我就会直接走开。我不在乎这会对社会造成什么影响。</a>
+                            </div>
+                        
+                    
+                        
+                            <div class="tree-item" style="margin: 5px 0">
+                                <a href="/20260124-2.html" class="tree-link" data-search-path="20260124-2.html">📄 领导者的职责是为人民服务，而不是让人民为领导者服务</a>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                
+                                </div>
+                            </div>
+                        
+                    
+                
+            </div>
+
+            <!-- aoao推荐 (Native Ad Slot) -->
+            
+        </div>
+
+        <div class="main-content">
+            <!-- 面包屑导航 (For Category Pages) -->
+            
+
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260119.html">大家好，我是马斯克，今天是2026年01月19日</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 奥斯汀的清晨冷得像火星的赤道，华氏36度，干燥的风刮在脸上提醒我这就是地球的现实。今天心情很复杂，像是一个被强行并联的电路，一边是身价飙升带来的多巴胺过载，另一边是该死的人类琐事带来的电压不稳。既然今天是马丁·路德·金纪念日，华尔街那帮只会盯着K线图的赌徒终于消停了，没有股价波动的一天，世界安静得有点不真实。   早上醒来第一件事就是看X。虽然股市休市，但舆论场永不打烊。xAI的新一轮融资确认了...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260119.html">
+                                    <img src="https://img.aoao.life/emusk-202601200131.webp" alt="大家好，我是马斯克，今天是2026年01月19日" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月19日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="大家好，我是马斯克，今天是2026年01月19日" 
+                                    data-url="https://emusk.cn/20260119.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260119.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="大家好，我是马斯克，今天是2026年01月19日" 
+                                        data-url="https://emusk.cn/20260119.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月25日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260120.html">大家好，我是马斯克，今天是2026年01月20日</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 奥斯汀的低气压让我背部隐隐作痛。NWS那帮人说极地冷锋周五要来，得州又要变成大冰库了 。手里这杯黑咖啡是唯一的热源。心情？像是在高压电线上走钢丝——充满静电和危险。今天得处理一堆烂摊子，但这就是所谓“活着”的感觉。      早上9点半，我兑现了十天前的承诺，按下了核按钮——开源X的推荐算法 。代码很丑，像是个充满补丁的弗兰肯斯坦，但我把它扔到了Github上。我在推特上说了实话：“我们知道这算...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260120.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601201815.webp" alt="大家好，我是马斯克，今天是2026年01月20日" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月20日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="大家好，我是马斯克，今天是2026年01月20日" 
+                                    data-url="https://emusk.cn/20260120.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260120.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="大家好，我是马斯克，今天是2026年01月20日" 
+                                        data-url="https://emusk.cn/20260120.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月25日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260121.html">大家好，我是马斯克，今天是2026年01月21日.md</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content"> 得克萨斯州，博卡奇卡。57华氏度，阴郁。 空气里全是未燃烧的甲烷味。心情像是在高维空间被卡住的张量——Colossus 2昨晚功耗飙到了1.2吉瓦，我们在用这座城市的电力将原始数据炼成神，而那个爱尔兰廉航的小丑Michael还在为了Starlink天线的空气动力学跟我喋喋不休。他搞了个什么“傻瓜大甩卖”来嘲讽我？我真想买下Ryanair，然后找个真叫Ryan的人来管。物理学最终会赢，闭源的恐龙迟...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260121.html">
+                                    <img src="https://img.aoao.life/emusk/emusk-202601212329.webp" alt="大家好，我是马斯克，今天是2026年01月21日.md" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月21日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="大家好，我是马斯克，今天是2026年01月21日.md" 
+                                    data-url="https://emusk.cn/20260121.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260121.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="大家好，我是马斯克，今天是2026年01月21日.md" 
+                                        data-url="https://emusk.cn/20260121.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月25日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div class="article-title">
+                        <a href="/20260112.html">大家好，我是马斯克，今天是2026年01月12日</a>
+                    </div>
+                    
+                    <div class="item-body">
+                        <div class="content">   今天博卡奇卡风大得像要剥掉人的皮，我心情极度暴躁。因为司法部突然指控DOGE（政府效率部)“非法访问社保数据”，还要解决星舰轨道加油泵在低温测试中该死的密封失效问题。   早上5点，我的手机就被华盛顿的恐慌淹没了。虽然DOGE的正式任务要到7月才结束，但我们刚刚为了核对“幽灵退休金”而运行了一次数据库交叉比对，结果被媒体描绘成了“马斯克窃取国民隐私”。这帮官僚根本不懂，不把这些几十年前的陈旧...</div>
+                        
+                        
+                            <div class="article-thumbnail">
+                                <a href="/20260112.html">
+                                    <img src="https://img.aoao.life/emusk-202601200204.webp" alt="大家好，我是马斯克，今天是2026年01月12日" loading="lazy">
+                                </a>
+                            </div>
+                        
+                    </div>
+
+                    <div class="article-footer">
+                        <span class="meta-item">发布于：2026年01月12日</span>
+                        
+                        <span class="meta-divider">·</span>
+                        
+                        <div class="index-meta-actions" style="display: flex; align-items: center; gap: 8px;">
+                            <button class="copy-btn index-copy-btn" 
+                                    data-title="大家好，我是马斯克，今天是2026年01月12日" 
+                                    data-url="https://emusk.cn/20260112.html"
+                                    onclick="handleIndexCopy(this)">
+                                复制
+                            </button>
+
+                            <div class="index-like-wrapper">
+                                <button class="like-btn index-like-btn" data-article-id="emusk.cn/20260112.html" onclick="handleLikeClick(this)">
+                                    <span class="like-icon heart-icon">🤍</span> 
+                                    <span class="like-count">...</span>
+                                </button>
+                            </div>
+
+                            <span class="meta-divider">·</span>
+
+                            <div class="index-like-wrapper">
+                                <button class="share-btn index-share-btn" 
+                                        data-title="大家好，我是马斯克，今天是2026年01月12日" 
+                                        data-url="https://emusk.cn/20260112.html"
+                                        onclick="handleShareClick(this)">
+                                    <span>🔗</span>
+                                    <span>分享</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        
+                        <span class="meta-divider">·</span>
+                        <span class="meta-item">更新于：2026年01月12日 01:01</span>
+                        
+                    </div>
+                </div>
+            
+
+            <div class="pagination-container">
+                
+                    <div class="prev-articles">
+                        
+                            <a href="/index_18.html" class="prev-articles-link">上一页</a>
+                        
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+    
+            <div class="footer">
+    
+                <div class="footer-nav">
+    
+                    <a href="/index.html">主页 (emusk.cn)</a> |
+    
+                    <a href="/about.html">关于我</a> |
+    
+                    <a href="/clocklife.html">马斯克生命时钟</a>
+    
+                </div>        <div class="copyright"><a href="https://aoao.life">BY: aoao.life</a></div>
+    </div>
+
+    <script>
+        window.allArticles = [];
+    </script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+</body>
+</html>
