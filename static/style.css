@@ -807,6 +807,14 @@ h2 {
 .pagination-container .more-articles {
     margin: 0;
     padding: 0;
+    flex-shrink: 0;
+}
+
+.pagination-container .prev-articles-link,
+.pagination-container .more-articles-link {
+    white-space: nowrap;
+    word-break: keep-all;
+    min-width: max-content;
 }
 
 /* 移动端分页导航优化 */
