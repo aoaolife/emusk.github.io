@@ -1,174 +1,130 @@
-// static/search.js - 搜索功能优化版：异步加载索引 + 侧边栏树联动
+var AOAO_DOMAIN = 'WEB';
+var AOAO_TOOL = 'ArticleSearch';
+var AOAO_SUMMARY = '站内文章全文搜索';
 
-(function() {
+(function () {
     const searchBox = document.getElementById('searchBox');
     const searchResults = document.getElementById('searchResults');
-    let searchTimeout;
-    let searchIndex = null;
-    let isFetching = false;
-
     if (!searchBox || !searchResults) return;
 
-    // 异步获取索引文件
-    async function fetchSearchIndex() {
-        if (searchIndex || isFetching) return;
-        isFetching = true;
-        try {
-            console.log("Fetching search index...");
-            const response = await fetch('/search_index.json');
-            searchIndex = await response.json();
-            console.log("Search index loaded:", searchIndex.length, "articles");
-        } catch (error) {
-            console.error("Failed to load search index:", error);
-        } finally {
-            isFetching = false;
-        }
-    }
-    
-    // 清除目录树高亮
-    function clearTreeHighlights() {
-        document.querySelectorAll('.tree-link.search-match').forEach(link => {
-            link.classList.remove('search-match');
-            link.style.fontWeight = ''; 
-            link.style.backgroundColor = '';
-            link.style.borderRadius = '';
-            link.style.padding = '';
-        });
+    let searchIndex = null;
+    let searchPromise = null;
+    let searchTimeout = null;
+    let activeIndex = -1;
+
+    function escapeHtml(value) {
+        return String(value || '').replace(/[&<>'"]/g, char => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+        })[char]);
     }
 
-    // 搜索函数
-    function performSearch(query) {
-        if (!query || query.trim().length < 2) {
+    async function fetchSearchIndex(forceRetry) {
+        if (searchIndex && !forceRetry) return searchIndex;
+        if (searchPromise && !forceRetry) return searchPromise;
+        searchPromise = fetch('/search_index.json', { cache: 'no-cache' })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                searchIndex = Array.isArray(data) ? data : [];
+                return searchIndex;
+            })
+            .finally(() => { searchPromise = null; });
+        return searchPromise;
+    }
+
+    function getExcerpt(text, query) {
+        const source = String(text || '');
+        const index = source.toLowerCase().indexOf(query);
+        const start = Math.max(0, index < 0 ? 0 : index - 45);
+        const end = Math.min(source.length, start + 170);
+        return `${start > 0 ? '…' : ''}${source.slice(start, end)}${end < source.length ? '…' : ''}`;
+    }
+
+    function highlight(text, query) {
+        const safeText = escapeHtml(text);
+        const safeQuery = escapeHtml(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return safeText.replace(new RegExp(`(${safeQuery})`, 'gi'), '<mark>$1</mark>');
+    }
+
+    function showMessage(message, retry) {
+        searchResults.innerHTML = `<div class="search-result-item search-message">${escapeHtml(message)}${retry ? ' <button type="button" id="searchRetry">重试</button>' : ''}</div>`;
+        searchResults.style.display = 'block';
+        const retryButton = document.getElementById('searchRetry');
+        if (retryButton) retryButton.addEventListener('click', () => runSearch(searchBox.value, true));
+    }
+
+    function renderResults(results, query) {
+        activeIndex = -1;
+        if (!results.length) {
+            showMessage('没有找到匹配的文章');
+            return;
+        }
+        searchResults.innerHTML = results.map(result => `
+            <a class="search-result-item" role="option" href="/${encodeURI(result.rel_path)}">
+                <strong>${highlight(result.title, query)}</strong>
+                <small>${highlight(result.excerpt, query)}</small>
+            </a>
+        `).join('');
+        searchResults.style.display = 'block';
+    }
+
+    async function runSearch(rawQuery, forceRetry) {
+        const query = rawQuery.trim().toLowerCase();
+        if (query.length < 2) {
             searchResults.style.display = 'none';
             searchResults.innerHTML = '';
-            clearTreeHighlights();
             return;
         }
-
-        if (!searchIndex) {
-            searchResults.innerHTML = '<div class="search-result-item" style="color: #999;">正在加载索引...</div>';
-            searchResults.style.display = 'block';
-            fetchSearchIndex().then(() => {
-                if (searchBox.value.trim().length >= 2) performSearch(searchBox.value);
-            });
-            return;
-        }
-
-        query = query.trim().toLowerCase();
-        const results = [];
-
-        searchIndex.forEach(article => {
-            const title = (article.title || '').toLowerCase();
-            const truncated = (article.truncated_content || '').toLowerCase();
-            
-            const titleMatch = title.includes(query);
-            const contentMatch = truncated.includes(query);
-            
-            if (titleMatch || contentMatch) {
-                let score = 0;
-                if (titleMatch) score += 10;
-                if (contentMatch) score += 5;
-                
-                results.push({
-                    title: article.title,
-                    path: article.rel_path,
-                    excerpt: getExcerpt(truncated, query, 150),
-                    score: score
-                });
-            }
-        });
-
-        results.sort((a, b) => b.score - a.score);
-        displayResults(results.slice(0, 10), query);
-    }
-
-    function getExcerpt(text, query, maxLength) {
-        const index = text.toLowerCase().indexOf(query.toLowerCase());
-        if (index === -1) return text.substring(0, maxLength) + '...';
-        const start = Math.max(0, index - 50);
-        const end = Math.min(text.length, index + query.length + 100);
-        let excerpt = text.substring(start, end);
-        if (start > 0) excerpt = '...' + excerpt;
-        if (end < text.length) excerpt = excerpt + '...';
-        return excerpt;
-    }
-
-    function highlightText(text, query) {
-        if (!query) return text;
-        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-        return text.replace(regex, '<span class="search-highlight">$1</span>');
-    }
-
-    function displayResults(results, query) {
-        clearTreeHighlights();
-
-        if (results.length === 0) {
-            searchResults.innerHTML = '<div class="search-result-item" style="color: #999; text-align: center;">未找到匹配的文章</div>';
-            searchResults.style.display = 'block';
-            return;
-        }
-
-        let html = '';
-        let firstMatchLink = null;
-
-        results.forEach(result => {
-            html += `
-                <div class="search-result-item" onclick="window.location.href='/${result.path}'">
-                    <div class="search-result-title">${highlightText(result.title, query)}</div>
-                    <div class="search-result-excerpt">${highlightText(result.excerpt, query)}</div>
-                </div>
-            `;
-            
-            // 联动左侧目录树：高亮并展开
-            const treeLink = document.querySelector(`.tree-link[data-search-path="${result.path}"]`);
-            if (treeLink) {
-                if (!firstMatchLink) firstMatchLink = treeLink;
-                treeLink.classList.add('search-match');
-                treeLink.style.fontWeight = 'bold';
-                treeLink.style.backgroundColor = 'rgba(255, 215, 0, 0.3)'; // 金色高亮标识搜索结果
-                treeLink.style.borderRadius = '4px';
-                treeLink.style.padding = '2px 6px';
-                
-                // 向上溯源展开所有父级文件夹
-                let parent = treeLink.closest('.tree-item');
-                while (parent) {
-                    const parentContainer = parent.closest('.tree-children');
-                    if (parentContainer) {
-                        const parentItem = parentContainer.previousElementSibling?.closest('.tree-item');
-                        if (parentItem) {
-                            parentItem.classList.add('expanded');
-                            const arrow = parentItem.querySelector('.tree-arrow');
-                            if (arrow) arrow.style.transform = 'rotate(90deg)';
-                            parentContainer.style.display = 'block';
-                            parent = parentItem;
-                        } else {
-                            break;
-                        }
-                    } else {
-                        break;
-                    }
-                }
-            }
-        });
-        
-        searchResults.innerHTML = html;
-        searchResults.style.display = 'block';
-        
-        // 将第一个匹配项平滑滚动到可视区域
-        if (firstMatchLink) {
-            firstMatchLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showMessage('正在加载搜索索引…');
+        try {
+            const articles = await fetchSearchIndex(forceRetry);
+            if (searchBox.value.trim().toLowerCase() !== query) return;
+            const results = articles.map(article => {
+                const title = String(article.title || '');
+                const content = String(article.content || article.truncated_content || '');
+                const titleIndex = title.toLowerCase().indexOf(query);
+                const contentIndex = content.toLowerCase().indexOf(query);
+                if (titleIndex < 0 && contentIndex < 0) return null;
+                return {
+                    title,
+                    rel_path: article.rel_path,
+                    excerpt: getExcerpt(content, query),
+                    score: titleIndex === 0 ? 30 : titleIndex >= 0 ? 20 : 10
+                };
+            }).filter(Boolean).sort((a, b) => b.score - a.score).slice(0, 10);
+            renderResults(results, query);
+        } catch (error) {
+            console.error('Search index load failed:', error);
+            showMessage('搜索加载失败，请检查网络后重试。', true);
         }
     }
 
-    searchBox.addEventListener('input', function(e) {
+    searchBox.addEventListener('focus', () => fetchSearchIndex(false).catch(() => {}));
+    searchBox.addEventListener('input', event => {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
+        searchTimeout = setTimeout(() => runSearch(event.target.value, false), 250);
     });
-
-    searchBox.addEventListener('focus', fetchSearchIndex);
-
-    document.addEventListener('click', function(e) {
-        if (!searchBox.contains(e.target) && !searchResults.contains(e.target)) {
+    searchBox.addEventListener('keydown', event => {
+        const options = Array.from(searchResults.querySelectorAll('a.search-result-item'));
+        if (!options.length || !['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(event.key)) return;
+        if (event.key === 'Escape') {
+            searchResults.style.display = 'none';
+            return;
+        }
+        event.preventDefault();
+        if (event.key === 'Enter' && activeIndex >= 0) {
+            options[activeIndex].click();
+            return;
+        }
+        activeIndex = event.key === 'ArrowDown'
+            ? (activeIndex + 1) % options.length
+            : (activeIndex - 1 + options.length) % options.length;
+        options.forEach((option, index) => option.classList.toggle('active', index === activeIndex));
+    });
+    document.addEventListener('click', event => {
+        if (!searchBox.contains(event.target) && !searchResults.contains(event.target)) {
             searchResults.style.display = 'none';
         }
     });
