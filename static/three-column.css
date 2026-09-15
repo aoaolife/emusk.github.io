@@ -121,7 +121,7 @@ body.three-column-page {
 .three-column-page .article-three-column {
     width: min(1440px, calc(100% - 40px));
     max-width: none;
-    margin: 24px auto 0;
+    margin: 8px auto 0;
     padding: 0;
     display: grid !important;
     grid-template-columns: 260px minmax(0, 1fr) 260px;
