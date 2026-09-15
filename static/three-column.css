@@ -84,7 +84,7 @@ body.three-column-page {
 
 .year-progress {
     position: relative;
-    height: 28px;
+    height: 22px;
     overflow: hidden;
     background: #eff3f4;
     border-radius: 0;
@@ -107,7 +107,7 @@ body.three-column-page {
     align-items: center;
     height: 100%;
     font-size: 13px;
-    line-height: 1;
+    line-height: 22px;
     color: #0f1419;
     font-weight: 700;
     text-shadow: 0 0 8px rgba(255, 255, 255, .95);
