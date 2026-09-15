@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 15 Sep 2026 19:44:55 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 21:05:11 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月15日</title>
+      <link>https://emusk.cn/20260915.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260915.html</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月15日 在奥斯汀巡视完Cybercab车队，又紧盯星舰第14次试飞的发射准备。媒体还在争论特斯拉与SpaceX的合并传闻，毫无意义。物理法则不在乎资本游戏，只在乎轨道运力与迭代速度。火星窗口不等人，今晚继续睡在工厂。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月14日</title>
       <link>https://emusk.cn/20260914.html</link>
@@ -579,17 +587,6 @@
       <category>xAI</category>
       <category>SpaceX</category>
       <category>OpenAI</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月03日</title>
-      <link>https://emusk.cn/20260503.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260503.html</guid>
-      <pubDate>Sun, 03 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月03日 今天审查了星舰最新的发射数据，猛禽引擎表现极佳，接下来的火星窗口期绝不能错过。下午在得州测试了擎天柱原型机，它的精细控制力让人惊叹。Grok也完成了新一轮演化。多行星物种的愿景正加速实现，时间不等人，继续工作。</description>
-      <category>星舰</category>
-      <category>猛禽发动机</category>
-      <category>Optimus</category>
-      <category>Grok</category>
     </item>
   </channel>
 </rss>
