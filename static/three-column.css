@@ -30,7 +30,9 @@ body.three-column-page {
 
 .site-header-main {
     width: min(1440px, calc(100% - 40px));
-    min-height: 64px;
+    height: 49px;
+    min-height: 49px;
+    box-sizing: border-box;
     margin: 0 auto;
     display: grid !important;
     grid-template-columns: 260px 1fr 260px;
@@ -446,6 +448,8 @@ body.three-column-page {
     .site-header { position: relative; }
     .site-header-main {
         width: calc(100% - 24px);
+        height: auto;
+        min-height: 0;
         padding: 10px 0;
         grid-template-columns: 1fr auto;
         gap: 10px;
