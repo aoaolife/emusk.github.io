@@ -5,18 +5,22 @@ var AOAO_SUMMARY = '三栏布局目录与文章导航交互';
 document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('directory-sidebar');
     const directoryButton = document.querySelector('.mobile-directory-button');
-    const stateKey = 'aoao_directory_expanded_v2';
+    const stateKey = 'aoao_directory_expanded_v3';
     const scrollKey = 'aoao_directory_scroll';
     const defaultExpandedPaths = ['aoao随笔'];
 
     function readExpandedPaths(useDefault) {
+        // List pages always start from the predictable desktop default:
+        // only “aoao随笔” is open. Old saved states could otherwise reopen
+        // all of its child directories after the CSS fix.
+        if (useDefault) return defaultExpandedPaths.slice();
         const stored = localStorage.getItem(stateKey);
-        if (stored === null) return useDefault ? defaultExpandedPaths.slice() : [];
+        if (stored === null) return [];
         try {
             const paths = JSON.parse(stored);
-            return Array.isArray(paths) ? paths : (useDefault ? defaultExpandedPaths.slice() : []);
+            return Array.isArray(paths) ? paths : [];
         } catch (_) {
-            return useDefault ? defaultExpandedPaths.slice() : [];
+            return [];
         }
     }
 
