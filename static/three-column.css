@@ -39,7 +39,16 @@ body.three-column-page {
 }
 
 .site-header .logo-text { justify-self: start; }
-.site-header .header-nav { justify-self: center; }
+.site-header .header-nav {
+    justify-self: center;
+    align-items: center;
+}
+.site-header .header-nav a {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    line-height: 1;
+}
 .site-header .header-search { position: relative; justify-self: stretch; width: auto; }
 .site-header .search-box {
     width: 100%;
