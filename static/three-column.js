@@ -5,12 +5,23 @@ var AOAO_SUMMARY = '三栏布局目录与文章导航交互';
 document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('directory-sidebar');
     const directoryButton = document.querySelector('.mobile-directory-button');
-    const stateKey = 'aoao_directory_expanded';
+    const stateKey = 'aoao_directory_expanded_v2';
     const scrollKey = 'aoao_directory_scroll';
+    const defaultExpandedPaths = ['aoao随笔'];
+
+    function readExpandedPaths(useDefault) {
+        const stored = localStorage.getItem(stateKey);
+        if (stored === null) return useDefault ? defaultExpandedPaths.slice() : [];
+        try {
+            const paths = JSON.parse(stored);
+            return Array.isArray(paths) ? paths : (useDefault ? defaultExpandedPaths.slice() : []);
+        } catch (_) {
+            return useDefault ? defaultExpandedPaths.slice() : [];
+        }
+    }
 
     if (sidebar) {
-        let savedPaths = [];
-        try { savedPaths = JSON.parse(localStorage.getItem(stateKey) || '[]'); } catch (_) {}
+        let savedPaths = readExpandedPaths(true);
         if (document.body.classList.contains('article-page')) {
             savedPaths = [];
             sidebar.querySelectorAll('[data-tree-path].expanded').forEach(item => {
@@ -133,8 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentArticleLocated = false;
 
                 if (!isArticleDrawer) {
-                    let savedPaths = [];
-                    try { savedPaths = JSON.parse(localStorage.getItem(stateKey) || '[]'); } catch (_) {}
+                    const savedPaths = readExpandedPaths(true);
                     const activePath = sidebar.dataset.activePath || '';
                     sidebar.querySelectorAll('[data-tree-path]').forEach(item => {
                         const nodePath = item.dataset.treePath;
