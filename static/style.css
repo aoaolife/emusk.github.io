@@ -117,7 +117,7 @@ body {
     transition: transform 0.2s ease;
 }
 
-.tree-item.expanded .tree-arrow {
+.tree-item.expanded > .tree-node .tree-arrow {
     transform: rotate(90deg);
 }
 
@@ -139,7 +139,7 @@ body {
     background: linear-gradient(to bottom, rgba(29, 155, 240, 0.3), transparent);
 }
 
-.tree-item.expanded .tree-children {
+.tree-item.expanded > .tree-children {
     display: block;
 }
 

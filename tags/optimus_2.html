@@ -6,7 +6,7 @@
     <title>Optimus 标签 - 马斯克中文日记</title>
     <link rel="alternate" type="application/rss+xml" title="aoao.life RSS" href="https://aoao.life/rss.xml">
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css?v=20260915_12">
     <style>
         body {
             background-color: #f0f2f5;
@@ -186,9 +186,9 @@
 
         /* 目录树交互 */
         .tree-children { display: none; margin-left: 20px; }
-        .tree-item.expanded .tree-children { display: block; }
+        .tree-item.expanded > .tree-children { display: block; }
         .tree-arrow { transition: transform 0.3s; display: inline-block; }
-        .tree-item.expanded .tree-arrow { transform: rotate(90deg); }
+        .tree-item.expanded > .tree-node .tree-arrow { transform: rotate(90deg); }
 
         /* 主内容 */
         .main-content {
