@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 17 Sep 2026 16:33:02 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 23:07:38 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月17日</title>
+      <link>https://emusk.cn/20260917.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260917.html</guid>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月17日 星舰第14次试飞进入倒计时，全轨道测试与星链V3部署不容有失。外界又在炒作合并传闻，全是噪音。我更关心孟菲斯Colossus超算的扩容与涡轮降噪。物理法则从不妥协，通往火星与AGI的每一步，唯有极度专注才能跨越。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月16日</title>
       <link>https://emusk.cn/20260916.html</link>
@@ -572,18 +580,6 @@
       <category>xAI</category>
       <category>Grok</category>
       <category>通用人工智能</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月05日</title>
-      <link>https://emusk.cn/20260505.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260505.html</guid>
-      <pubDate>Tue, 05 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月05日 以150万美元与SEC就推特收购案达成和解，这笔微不足道的罚款恰恰证明了我的清白。 法庭上布罗克曼竟称我当年差点动手打他，荒谬至极，我只是愤怒于他们背离了OpenAI的初心。 真正令我振奋的是，SpaceX的新方案直接将火星百万常住人口与我的考核绑定。这才是人类的未来。</description>
-      <category>SEC</category>
-      <category>推特</category>
-      <category>OpenAI</category>
-      <category>SpaceX</category>
-      <category>火星移民</category>
     </item>
   </channel>
 </rss>
