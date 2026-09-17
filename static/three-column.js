@@ -5,6 +5,8 @@ var AOAO_SUMMARY = '三栏布局目录与文章导航交互';
 document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('directory-sidebar');
     const directoryButton = document.querySelector('.mobile-directory-button');
+    const floatingDirectoryButton = document.querySelector('.floating-directory-button');
+    const directoryButtons = [directoryButton, floatingDirectoryButton].filter(Boolean);
     const stateKey = 'aoao_directory_expanded_v3';
     const scrollKey = 'aoao_directory_scroll';
     const defaultExpandedPaths = ['aoao随笔'];
@@ -207,7 +209,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function setDirectoryOpen(open) {
             sidebar.classList.toggle('mobile-open', open);
-            directoryButton.setAttribute('aria-expanded', String(open));
+            directoryButtons.forEach(button => button.setAttribute('aria-expanded', String(open)));
+            if (floatingDirectoryButton) {
+                floatingDirectoryButton.setAttribute('aria-label', open ? '关闭文章目录' : '打开文章目录');
+                floatingDirectoryButton.classList.toggle('show', open || (window.innerWidth <= 767 && window.scrollY > 400));
+            }
             if (isArticleDrawer) {
                 document.body.classList.toggle('drawer-open', open);
             } else if (open) {
@@ -257,17 +263,35 @@ document.addEventListener('DOMContentLoaded', function () {
             // Warm only the small JSON response on intent; DOM nodes are still
             // created solely when the visitor actually opens the directory.
             const prefetchTree = () => { loadTreeData().catch(() => {}); };
-            directoryButton.addEventListener('pointerenter', prefetchTree, { once: true });
-            directoryButton.addEventListener('focus', prefetchTree, { once: true });
+            directoryButtons.forEach(button => {
+                button.addEventListener('pointerenter', prefetchTree, { once: true });
+                button.addEventListener('focus', prefetchTree, { once: true });
+            });
         }
 
-        directoryButton.addEventListener('click', () => {
+        directoryButtons.forEach(button => button.addEventListener('click', () => {
             const shouldOpen = !sidebar.classList.contains('mobile-open');
             if (isArticleDrawer && shouldOpen) openArticleDirectory();
             else setDirectoryOpen(shouldOpen);
-        });
+        }));
 
         if (!isArticleDrawer) ensureTreeRendered().catch(() => {});
+    }
+
+    if (document.body.classList.contains('collapsible-listing-page')) {
+        function updateListingHeader() {
+            const isScrolled = window.scrollY > 0;
+            document.body.classList.toggle('header-compact', isScrolled);
+            if (floatingDirectoryButton) {
+                const showFloatingDirectory = window.innerWidth <= 767
+                    && (window.scrollY > 400 || sidebar?.classList.contains('mobile-open'));
+                floatingDirectoryButton.classList.toggle('show', showFloatingDirectory);
+            }
+        }
+
+        window.addEventListener('scroll', updateListingHeader, { passive: true });
+        window.addEventListener('resize', updateListingHeader);
+        updateListingHeader();
     }
 
     const randomButton = document.getElementById('random-article-button');
