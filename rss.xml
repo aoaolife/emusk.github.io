@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 16 Sep 2026 02:25:55 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 15:48:13 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月16日</title>
+      <link>https://emusk.cn/20260916.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260916.html</guid>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月16日 。星舰第十二次试飞终于完全成功，助推器和飞船都精准溅落。团队今晚在星港开了香槟。AI5芯片提前流片，FSD事故率再降一个量级。明天继续审火星城市蓝图。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月15日</title>
       <link>https://emusk.cn/20260915.html</link>
@@ -576,17 +584,6 @@
       <category>OpenAI</category>
       <category>SpaceX</category>
       <category>火星移民</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月04日</title>
-      <link>https://emusk.cn/20260504.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260504.html</guid>
-      <pubDate>Mon, 04 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月04日 庭审继续。我曾试图与格雷格和解，但他拒绝。我直接告诉他，这周末他和山姆将成为全美最受讨厌的人，走着瞧。 好消息是，首辆量产版Semi卡车终于在内华达工厂下线。同时，我已将xAI正式并入SpaceX。AI与航天的结合，必将加速我们的火星征程。</description>
-      <category>特斯拉Semi</category>
-      <category>xAI</category>
-      <category>SpaceX</category>
-      <category>OpenAI</category>
     </item>
   </channel>
 </rss>
