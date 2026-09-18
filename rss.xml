@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 18 Sep 2026 14:55:30 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 23:33:14 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月18日</title>
+      <link>https://emusk.cn/20260918.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260918.html</guid>
+      <pubDate>Fri, 18 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月18日 今晚在奥斯汀。Neuralink最新实验进展给了我巨大惊喜，我们在接近奇迹。SpaceX与AI正在深度融合，但我仍忧心AGI失控的风险。外界还在热衷于纪录片与监管争议，而我只信奉第一性原理。文明必须加速冲向火星。</description>
+      <category>马斯克2026年日程日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月17日</title>
       <link>https://emusk.cn/20260917.html</link>
@@ -568,18 +576,6 @@
       <category>OpenAI</category>
       <category>通用人工智能</category>
       <category>太空数据中心</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月06日</title>
-      <link>https://emusk.cn/20260506.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260506.html</guid>
-      <pubDate>Wed, 06 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月06日 白天在星城督战，猛禽发动机的迭代速度必须再翻一倍。晚上与 xAI 团队激辩，Grok-3 的推理能力仍有瓶颈。跨越星辰大海和构建通用人工智能，两件事都等不了。时间是我们最稀缺的资产。</description>
-      <category>星际基地</category>
-      <category>猛禽发动机</category>
-      <category>xAI</category>
-      <category>Grok</category>
-      <category>通用人工智能</category>
     </item>
   </channel>
 </rss>
