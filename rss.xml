@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 18 Sep 2026 23:33:14 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 13:10:29 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月19日</title>
+      <link>https://emusk.cn/20260919.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260919.html</guid>
+      <pubDate>Sat, 19 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月19日 ，星舰第十二次试飞终于成功回收。站在控制室，看着助推器稳稳落回塔架，我松了口气。火星窗口只剩四年，我们得把发射频率提到每两周一次。今夜不眠，继续优化猛禽3。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月18日</title>
       <link>https://emusk.cn/20260918.html</link>
@@ -564,18 +572,6 @@
       <category>Optimus</category>
       <category>星舰</category>
       <category>Neuralink</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月07日</title>
-      <link>https://emusk.cn/20260507.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260507.html</guid>
-      <pubDate>Thu, 07 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月07日 今天宣布在得州投资550亿美元建设Terafab芯片厂。我们的AI算力需求已超全球供应链极限，必须亲自制造半导体。同时，与OpenAI的法庭较量还在继续。通用人工智能和人类未来绝不能被虚伪的牟利者垄断，大规模太空数据中心计划也已提上日程。</description>
-      <category>Terafab</category>
-      <category>半导体</category>
-      <category>OpenAI</category>
-      <category>通用人工智能</category>
-      <category>太空数据中心</category>
     </item>
   </channel>
 </rss>
