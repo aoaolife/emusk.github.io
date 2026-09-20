@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 20 Sep 2026 13:10:29 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 03:36:52 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月20日</title>
+      <link>https://emusk.cn/20260920.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260920.html</guid>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月20日 ，得州。星舰第12次试飞终于完全复用成功。Optimus在弗里蒙特工厂拧了第100万颗螺丝。Grok 5的推理能耗又降了四成。火星窗口还有四个月，这次得带上足够的人。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月19日</title>
       <link>https://emusk.cn/20260919.html</link>
@@ -560,17 +568,6 @@
       <category>Optimus</category>
       <category>Cybercab</category>
       <category>FSD</category>
-      <category>Neuralink</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月08日</title>
-      <link>https://emusk.cn/20260508.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260508.html</guid>
-      <pubDate>Fri, 08 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月08日 。弗里蒙特的S和X生产线正在清理，为Optimus Gen 3腾出空间，制造业的奇点已至。Starship V3第12次飞行成功验证了真空引擎重启，下个月的轨道推进剂转移试验至关重要。Neuralink盲视临床实验正如火如荼，人类正以前所未有的速度迈向意识的新边界。速度就是一切。</description>
-      <category>特斯拉</category>
-      <category>Optimus</category>
-      <category>星舰</category>
       <category>Neuralink</category>
     </item>
   </channel>
