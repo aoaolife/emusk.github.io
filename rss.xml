@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 21 Sep 2026 03:36:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 00:41:57 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月24日</title>
+      <link>https://emusk.cn/20260924.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260924.html</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月24日 。星舰第十次试飞终于成功回收，火星窗口临近。AI5芯片流片顺利，Optimus开始量产。但今天最触动我的，是孩子们说想一起去火星。文明多行星化，不是口号，是给他们的承诺。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月20日</title>
       <link>https://emusk.cn/20260920.html</link>
@@ -557,18 +565,6 @@
       <category>IPO</category>
       <category>Terafab</category>
       <category>DOGE</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月09日</title>
-      <link>https://emusk.cn/20260509.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260509.html</guid>
-      <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月09日 距离11月星舰火星无人发射越来越近，刚确认首批货物将搭载擎天柱。得州的Cybercab量产线运转顺利，FSD测试里程正呈现指数级爆发。 同时，Neuralink的自动化手术机器人已准备好今年的大规模植入，SpaceXAI的轨道数据中心也在加速部署。多行星文明的愿景正在变现，唯有继续工作。</description>
-      <category>星舰</category>
-      <category>Optimus</category>
-      <category>Cybercab</category>
-      <category>FSD</category>
-      <category>Neuralink</category>
     </item>
   </channel>
 </rss>
