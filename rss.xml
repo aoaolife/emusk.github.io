@@ -6,7 +6,39 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 29 Sep 2026 14:00:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 00:16:14 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月02日</title>
+      <link>https://emusk.cn/20261002.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261002.html</guid>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月02日 。星舰第15次试飞终于完全成功，筷子夹住了超重助推器。团队在控制室拥抱。火星窗口只剩三年，时间不多了。今晚得陪X Æ A-Xii写作业。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月01日</title>
+      <link>https://emusk.cn/20261001.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261001.html</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月01日 。星舰第五飞终于拿到FAA批文，明年火星窗口稳了。特斯拉FSD v14推送首日，干预率降了七成。今天只睡四小时，但值得。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月30日</title>
+      <link>https://emusk.cn/20260930.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260930.html</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月30日 ，星舰第十二次复用成功，单公斤成本压到两百美元。Neuralink第三例患者用意念玩《星际争霸》。特斯拉FSD入华获批。同天，中国可回收火箭首飞。竞争让人清醒，离火星又近一步。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年09月29日</title>
+      <link>https://emusk.cn/20260929.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20260929.html</guid>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 +0800</pubDate>
+      <description>2026年09月29日 。星舰第十二次试飞成功，首次实现轨道级回收。Optimus已进入得州工厂夜班。AI5芯片流片在即。火星，两年内。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年09月28日</title>
       <link>https://emusk.cn/20260928.html</link>
@@ -504,53 +536,6 @@
       <category>OpenAI</category>
       <category>FSD</category>
       <category>Neuralink</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月17日</title>
-      <link>https://emusk.cn/20260517.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260517.html</guid>
-      <pubDate>Sun, 17 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月17日 Optimus产线调试让我彻夜未眠，熟悉的“生产地狱”重演。复杂零件组装极其艰难，但量产目标必须达成。 SpaceX团队正死磕Starship在轨加注难题，誓保今年的火星发射窗口。同时，Grok 5在超级集群上的训练进展顺利。实现AGI与多行星物种的愿景绝非易事，唯有加速前行。</description>
-      <category>Optimus</category>
-      <category>星舰</category>
-      <category>在轨加注</category>
-      <category>Grok</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月16日</title>
-      <link>https://emusk.cn/20260516.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260516.html</guid>
-      <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月16日 今天外界都在谈论我那万亿美元的薪酬，但SpaceX的唯一使命是火星，而非迎合华尔街的季度财报。Grok Build今日上线，强大的编码智能体将加速我们的愿景。OpenAI的官司下周出结果。对了，Instagram确实是给女孩玩的。</description>
-      <category>SpaceX</category>
-      <category>火星计划</category>
-      <category>Grok</category>
-      <category>OpenAI</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月15日</title>
-      <link>https://emusk.cn/20260515.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260515.html</guid>
-      <pubDate>Fri, 15 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月15日 今天在北京国宴上和Tim、雷军同席，对镜头做了鬼脸。 xAI今天正式发布了AI编程代理Grok Build，它将重塑软件工程。同时，X也与英国监管达成协议。 Delta因强制网页登录拒绝Starlink，真是太蠢了。顺便说一句，黄仁勋确实是我真正的朋友。</description>
-      <category>xAI</category>
-      <category>Grok</category>
-      <category>人工智能</category>
-      <category>星链</category>
-      <category>X</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月14日</title>
-      <link>https://emusk.cn/20260514.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260514.html</guid>
-      <pubDate>Thu, 14 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月14日 今天在北京随行总统会见中方，FSD入华协议谈判顺利。空军一号上的星链运行完美。 xAI正式并入SpaceXAI，正打造全新AI算力格局。星基地的星舰V3即将迎来第12次试飞。一切都在加速，人类跨星际的未来已经开启。</description>
-      <category>FSD</category>
-      <category>星链</category>
-      <category>xAI</category>
-      <category>SpaceX</category>
-      <category>星舰</category>
     </item>
   </channel>
 </rss>
