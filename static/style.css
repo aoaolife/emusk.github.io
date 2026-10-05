@@ -903,7 +903,7 @@ h2 {
 }
 
 /* 仅针对底部容器内的大按钮 */
-.like-section-container .like-btn, 
+.like-section-container .like-btn,
 .like-section-container .share-btn {
     padding: 10px 25px;
     font-size: 16px;

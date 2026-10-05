@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = btn.getAttribute('data-title');
         const url = btn.getAttribute('data-url');
         const textToCopy = `${title}\n原文链接：${url}`;
-        
+
         const updateBtn = () => {
             const originalText = btn.innerText;
             btn.innerText = '已复制';
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.handleShareClick = function(btn) {
         const title = btn.getAttribute('data-title');
         const url = btn.getAttribute('data-url');
-        
+
         if (navigator.share) {
             navigator.share({
                 title: title,
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Like functionality
     const API_URL = "https://aoao-api.focusj.workers.dev";
-    
+
     function getArticleId(btn) {
         // 优先从 data-article-id 获取
         let id = btn.getAttribute('data-article-id');
@@ -361,12 +361,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // 乐观 UI 更新
         setLikedState(btn, articleId);
         if (icon) icon.classList.add('anim-heart');
-        
+
         let currentCount = parseInt(countSpan.innerText) || 0;
         if (countSpan) countSpan.innerText = currentCount + 1;
 
         // 发送请求
-        fetch(`${API_URL}/api/like`, { 
+        fetch(`${API_URL}/api/like`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ post_id: articleId })
@@ -396,14 +396,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.showToast = function(msg) {
         const toast = document.getElementById('toast-container');
         if (!toast) return;
-        toast.innerText = msg; 
+        toast.innerText = msg;
         toast.classList.add('toast-show');
         setTimeout(() => { toast.classList.remove('toast-show'); }, 2500);
     };
 
     function timeAgo(dateString) {
         if (!dateString) return "刚刚";
-        const date = new Date(dateString.replace(" ", "T") + "Z"); 
+        const date = new Date(dateString.replace(" ", "T") + "Z");
         const seconds = Math.floor((new Date() - date) / 1000);
         let interval = seconds / 31536000; if (interval > 1) return Math.floor(interval) + " 年前";
         interval = seconds / 2592000; if (interval > 1) return Math.floor(interval) + " 个月前";
@@ -415,32 +415,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadComments() {
         const postEl = document.getElementById('interaction-section');
-        if (postEl) { 
-            POST_ID = postEl.getAttribute('data-post-id'); 
+        if (postEl) {
+            POST_ID = postEl.getAttribute('data-post-id');
         }
         if (!POST_ID) return;
-        
+
         try {
             const res = await fetch(`${API_URL}/api/comment?post_id=${encodeURIComponent(POST_ID)}`);
             if (!res.ok) return;
             const data = await res.json();
-            const ul = document.getElementById('comments-ul'); 
+            const ul = document.getElementById('comments-ul');
             if (!ul) return;
             ul.innerHTML = "";
             if (!data.comments || data.comments.length === 0) {
                 ul.innerHTML = "<li style='color: #999; text-align: center; padding: 20px 0;'>暂无留言，抢个沙发吧！</li>";
                 return;
             }
-            
+
             // 组装评论树
             const commentMap = {};
             const rootComments = [];
-            
+
             data.comments.forEach(c => {
                 c.children = [];
                 commentMap[c.id] = c;
             });
-            
+
             data.comments.forEach(c => {
                 if (c.parent_id && commentMap[c.parent_id]) {
                     commentMap[c.parent_id].children.push(c);
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const li = document.createElement('li');
                 li.className = 'comment-item';
                 li.style.cssText = `display: flex; gap: 15px; margin-bottom: 20px; ${isChild ? 'margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px;' : 'border-bottom: 1px dashed #eee; padding-bottom: 15px;'}`;
-                
+
                 let childrenHtml = '';
                 if (c.children && c.children.length > 0) {
                     const childrenItems = c.children.map(child => renderComment(child, true).outerHTML).join('');
@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="flex: 1;">
                         <div style="margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <strong style="color: #333; font-size: ${isChild ? '13px' : '15px'};">${c.author}</strong> 
+                                <strong style="color: #333; font-size: ${isChild ? '13px' : '15px'};">${c.author}</strong>
                                 <span style="color: #999; font-size: 12px; margin-left: 10px;">${timeAgo(c.created_at)}</span>
                             </div>
                             <span style="color: #1d9bf0; font-size: 13px; cursor: pointer;" onclick="replyTo(${c.id}, '${c.author}')">回复</span>
@@ -484,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Failed to load comments:', e);
         }
     }
-    
+
     // 存储当前正在回复的评论ID
     let currentParentId = null;
 
@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (contentInput) {
             contentInput.placeholder = `回复 @${author} :`;
             contentInput.focus();
-            
+
             // 添加取消回复提示
             let cancelBtn = document.getElementById('cancel-reply-btn');
             if (!cancelBtn) {
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const authorInput = document.getElementById('comment-author'), emailInput = document.getElementById('comment-email');
         const contentInput = document.getElementById('comment-content'), btn = document.getElementById('submit-comment-btn');
         if (!authorInput || !emailInput || !contentInput || !btn) return;
-        
+
         const author = authorInput.value.trim(), email = emailInput.value.trim(), content = contentInput.value.trim();
 
         // 确保 POST_ID 最新
@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         btn.disabled = true;
         const originalText = btn.innerText;
-        btn.innerText = "正在思考中..."; 
+        btn.innerText = "正在思考中...";
 
         try {
             const payload = { post_id: POST_ID, author, email, content };
@@ -559,26 +559,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             const resData = await res.json();
             if (res.ok && resData.success) {
-                localStorage.setItem('aoao_author', author); 
+                localStorage.setItem('aoao_author', author);
                 localStorage.setItem('aoao_email', email);
-                contentInput.value = ""; 
+                contentInput.value = "";
                 contentInput.placeholder = "写下你的想法... *";
                 currentParentId = null;
                 const cancelBtn = document.getElementById('cancel-reply-btn');
                 if (cancelBtn) cancelBtn.remove();
 
-                showToast("留言发表成功！"); 
+                showToast("留言发表成功！");
                 // 延迟 800ms 刷新，确保 D1 数据库写入扩散完成
-                setTimeout(loadComments, 800); 
-            } else { 
-                showToast(resData.error || "留言失败，请检查输入"); 
+                setTimeout(loadComments, 800);
+            } else {
+                showToast(resData.error || "留言失败，请检查输入");
             }
-        } catch (e) { 
-            showToast("网络连接超时"); 
+        } catch (e) {
+            showToast("网络连接超时");
             console.error(e);
-        } finally { 
-            btn.disabled = false; 
-            btn.innerText = originalText; 
+        } finally {
+            btn.disabled = false;
+            btn.innerText = originalText;
         }
     }
     window.submitComment = submitComment;
@@ -592,8 +592,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const postEl = document.getElementById('interaction-section');
-    if (postEl) { 
-        POST_ID = postEl.getAttribute('data-post-id'); 
-        initInteraction(); 
+    if (postEl) {
+        POST_ID = postEl.getAttribute('data-post-id');
+        initInteraction();
     }
 });
