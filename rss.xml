@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 05 Oct 2026 22:32:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 23:47:24 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月07日</title>
+      <link>https://emusk.cn/20261007.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261007.html</guid>
+      <pubDate>Wed, 07 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月07日 有人质疑德州Terafab，我再次重申：晶圆厂必须由我们亲自建造和运营，毋庸置疑。算力是文明的基石。今天FCC批准了直连星链申请，SpaceX也在敲定新一轮AI芯片融资。只要物理定律允许，就全速推进。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月02日</title>
       <link>https://emusk.cn/20261002.html</link>
@@ -524,18 +532,6 @@
       <category>猛禽发动机</category>
       <category>Optimus</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月18日</title>
-      <link>https://emusk.cn/20260518.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260518.html</guid>
-      <pubDate>Mon, 18 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月18日 今天在德州推进SpaceX的IPO，为火星计划筹集资金。同时，与OpenAI的诉讼已进入陪审团审议阶段，捍卫AI非营利初心至关重要。 刚通过视频参与智能出行峰会，重申年底前FSD将实现无监督驾驶。Neuralink的盲视项目人体植入也在今年筹备中。时间紧迫，继续加速。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>OpenAI</category>
-      <category>FSD</category>
-      <category>Neuralink</category>
     </item>
   </channel>
 </rss>
