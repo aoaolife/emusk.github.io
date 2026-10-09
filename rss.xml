@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 08 Oct 2026 23:25:58 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 23:24:59 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月09日</title>
+      <link>https://emusk.cn/20261009.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261009.html</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月09日 ，星舰第十二次试飞成功回收。Optimus开始进厂拧螺丝，比人便宜。特斯拉FSD入华谈判重启。AI5芯片流片，算力翻三倍。火星，我们来了。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月08日</title>
       <link>https://emusk.cn/20261008.html</link>
@@ -504,18 +512,6 @@
       <category>xAI</category>
       <category>OpenAI</category>
       <category>诉讼</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月24日</title>
-      <link>https://emusk.cn/20260524.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260524.html</guid>
-      <pubDate>Sun, 24 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月24日 。SpaceX已提交1.75万亿美元IPO申请，星舰V3成功溅落印度洋，离火星又近了一步。特斯拉FSD也正式在中国落地。OpenAI的诉讼判决令人遗憾，但无法阻挡xAI探索宇宙真理的步伐。保持专注，加速前行。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星舰</category>
-      <category>FSD</category>
-      <category>OpenAI</category>
     </item>
   </channel>
 </rss>
