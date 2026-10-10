@@ -44,7 +44,18 @@ body.three-column-page {
     gap: 24px;
 }
 
-.site-header .logo-text { justify-self: start; }
+.site-header .logo-text {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+.site-header .logo-home-icon {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+    fill: #f4b544;
+}
 .site-header .header-nav {
     justify-self: center;
     align-items: center;
@@ -302,6 +313,32 @@ body.three-column-page {
     color: #0f1419;
     font-size: 15px;
     font-weight: 800;
+    text-align: center;
+}
+
+.three-column-page .tree-icon {
+    position: relative;
+    font-size: 0;
+}
+.three-column-page .tree-icon::before,
+.three-column-page .tree-icon::after {
+    content: "";
+    position: absolute;
+    background: #f4b544;
+}
+.three-column-page .tree-icon::before {
+    top: 5px;
+    left: 0;
+    width: 16px;
+    height: 11px;
+    border-radius: 2px;
+}
+.three-column-page .tree-icon::after {
+    top: 2px;
+    left: 1px;
+    width: 7px;
+    height: 5px;
+    border-radius: 2px 2px 0 0;
 }
 
 .three-column-page .tree-container,
