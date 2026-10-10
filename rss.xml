@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 10 Oct 2026 11:07:08 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 23:22:27 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月10日</title>
+      <link>https://emusk.cn/20261010.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261010.html</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月10日 ，星舰第十二次试飞终于实现完整回收。火星窗口临近，Optimus在工厂学会了拧螺丝。我凌晨三点还在改代码，梦见多行星文明不再遥远。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月09日</title>
       <link>https://emusk.cn/20261009.html</link>
@@ -500,18 +508,6 @@
       <category>Grok</category>
       <category>星链</category>
       <category>人工智能</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月25日</title>
-      <link>https://emusk.cn/20260525.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260525.html</guid>
-      <pubDate>Mon, 25 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月25日 SpaceX的IPO文件正式公开，两万亿美元估值在意料之中。xAI虽烧钱，但Colossus算力优势已不可撼动。媒体炒作的万亿富翁头衔毫无意义，火星才是重点。 今天法庭以诉讼时效驳回我对OpenAI的起诉，简直荒谬。背叛初衷不可原谅，立即上诉。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>xAI</category>
-      <category>OpenAI</category>
-      <category>诉讼</category>
     </item>
   </channel>
 </rss>
