@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 10 Oct 2026 23:22:27 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 23:22:26 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月11日</title>
+      <link>https://emusk.cn/20261011.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261011.html</guid>
+      <pubDate>Sun, 11 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月11日 。星舰第十二次试飞终于成功入轨并回收。团队今晚在星港开了香槟。火星，我们来了。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月10日</title>
       <link>https://emusk.cn/20261010.html</link>
@@ -496,18 +504,6 @@
       <category>xAI</category>
       <category>特斯拉</category>
       <category>无聊公司</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月26日</title>
-      <link>https://emusk.cn/20260526.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260526.html</guid>
-      <pubDate>Tue, 26 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月26日 星舰测试数据传回，猛禽引擎效率仅提升3%，离火星殖民的愿景还是太慢。人类跨星际生存的窗口正在缩小，我们必须提速。 下午视察了得州工厂，Optimus机器人已正式接管部分核心装配线。同时，Grok最新集群算力翻倍，其推理能力正迅速逼近AGI的物理临界点。 今晚继续睡在车间地板，明天还要解决星链的带宽瓶颈。</description>
-      <category>星舰</category>
-      <category>Optimus</category>
-      <category>Grok</category>
-      <category>星链</category>
-      <category>人工智能</category>
     </item>
   </channel>
 </rss>
