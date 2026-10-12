@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 11 Oct 2026 23:22:26 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 23:22:13 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月12日</title>
+      <link>https://emusk.cn/20261012.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261012.html</guid>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月12日 。星舰第十二飞终于把第二批百吨载荷送入轨道。看着数据曲线，我想起二十年前在PayPal时写的那些代码。人类离火星又近了一步。今天只睡了三小时，值。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月11日</title>
       <link>https://emusk.cn/20261011.html</link>
@@ -492,18 +500,6 @@
       <category>星链</category>
       <category>OpenAI</category>
       <category>X</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月27日</title>
-      <link>https://emusk.cn/20260527.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260527.html</guid>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月27日 SpaceX创纪录IPO在即。为加速火星任务，我们已用SpaceX收购xAI，我也正酝酿将特斯拉与SpaceX合并。 诉OpenAI案因时效被驳回，但无碍大局。无聊公司在新奥尔良的隧道项目顺利敲定。一切都在加速推进中。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>xAI</category>
-      <category>特斯拉</category>
-      <category>无聊公司</category>
     </item>
   </channel>
 </rss>
