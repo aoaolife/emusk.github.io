@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 12 Oct 2026 23:22:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 23:22:47 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月13日</title>
+      <link>https://emusk.cn/20261013.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261013.html</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月13日 。星舰第十二飞终于全回收。脑机接口让首位患者用意念发推。特斯拉FSD入华获批。火星窗口倒计时，今晚睡工厂。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月12日</title>
       <link>https://emusk.cn/20261012.html</link>
@@ -488,18 +496,6 @@
       <category>xAI</category>
       <category>星舰</category>
       <category>DOGE</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月28日</title>
-      <link>https://emusk.cn/20260528.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260528.html</guid>
-      <pubDate>Thu, 28 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月28日 。 SpaceX提交IPO，估值或达两万亿，将与X、xAI及星链整合。外界热议其与特斯拉合并，跨行星愿景正加速。面对俄罗斯因星链发出的核威胁，我绝不妥协。OpenAI放弃Sora为X让路。火星见。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星链</category>
-      <category>OpenAI</category>
-      <category>X</category>
     </item>
   </channel>
 </rss>
