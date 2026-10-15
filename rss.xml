@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 15 Oct 2026 13:19:49 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 23:24:28 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月15日</title>
+      <link>https://emusk.cn/20261015.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261015.html</guid>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月15日 。星舰第十二次试飞，终于把上面级稳稳接回筷子。团队在控制室喊哑了嗓子。我盯着数据流，没笑。距离让生命多行星化，还差一千次这样的早晨。今晚继续睡工厂。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月14日</title>
       <link>https://emusk.cn/20261014.html</link>
@@ -480,18 +488,6 @@
       <category>IPO</category>
       <category>OpenAI</category>
       <category>Neuralink</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月30日</title>
-      <link>https://emusk.cn/20260530.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260530.html</guid>
-      <pubDate>Sat, 30 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月30日 。 星舰V3在轨推进剂转移测试成功，Raptor3引擎表现完美，彻底锁定了年底的火星发射窗口。 得州工厂正全力赶制Optimus机器人，它们将搭乘首批无人星舰前往火星阿卡迪亚平原探路。 让人类成为多行星物种的倒计时已开启。回去工作。</description>
-      <category>星舰</category>
-      <category>在轨加注</category>
-      <category>猛禽发动机</category>
-      <category>Optimus</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
