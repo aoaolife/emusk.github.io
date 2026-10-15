@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 13 Oct 2026 23:22:47 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 13:19:49 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月14日</title>
+      <link>https://emusk.cn/20261014.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261014.html</guid>
+      <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月14日 。星舰第十二飞终于把百吨载荷送入轨道，火星窗口不等人。Optimus在工厂拧螺丝的速度翻倍，但离殖民还差得远。今天只有23小时，因为地球自转又快了。别问，问就是加速。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月13日</title>
       <link>https://emusk.cn/20261013.html</link>
@@ -484,18 +492,6 @@
       <category>猛禽发动机</category>
       <category>Optimus</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月29日</title>
-      <link>https://emusk.cn/20260529.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260529.html</guid>
-      <pubDate>Fri, 29 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月29日 SpaceX的IPO估值锁定1.8万亿美元，我们正加速向轨道数据中心与AI巨头转型。我已辞去DOGE职务，全力推进IPO与xAI深度整合。日前Starship V3首飞虽因助推器瑕疵遭FAA停飞，但这只是通往火星的微小波折。未来属于我们，火星见。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>xAI</category>
-      <category>星舰</category>
-      <category>DOGE</category>
     </item>
   </channel>
 </rss>
