@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 16 Oct 2026 22:27:41 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 23:22:29 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月16日</title>
+      <link>https://emusk.cn/20261016.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261016.html</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月16日 。星舰第十二次试飞终于完全回收，筷子夹住了超重助推器。火星窗口倒计时八个月。xAI的Grok 6今天通过物理博士资格考。人类离多行星物种又近一步。继续压榨时间。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月15日</title>
       <link>https://emusk.cn/20261015.html</link>
@@ -476,18 +484,6 @@
       <category>火星计划</category>
       <category>Grok</category>
       <category>FSD</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年05月31日</title>
-      <link>https://emusk.cn/20260531.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260531.html</guid>
-      <pubDate>Sun, 31 May 2026 00:00:00 +0800</pubDate>
-      <description>2026年05月31日 星舰V3的局部解体不掩入轨的成功，物理定律未被打破，剩下的只是迭代。SpaceX已提交IPO文件，万亿估值仅是起点。 对OpenAI的败诉令人失望，我会上诉到底。Neuralink正加速量产，X金融即将上线。无视合并谣言，保持专注，火星不等人。</description>
-      <category>星舰</category>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>OpenAI</category>
-      <category>Neuralink</category>
     </item>
   </channel>
 </rss>
