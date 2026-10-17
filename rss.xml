@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 16 Oct 2026 23:22:29 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 23:22:22 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月17日</title>
+      <link>https://emusk.cn/20261017.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261017.html</guid>
+      <pubDate>Sat, 17 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月17日 。今天盯着星舰第12次试飞的遥测数据，热分离时序仍要再压0.3秒。Neuralink刚获批新临床试验，但我不急。真正的瓶颈永远是物理，不是监管。晚上和X团队过了推荐算法，把互动权重再调低。火星窗口不等人，得再快一点。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月16日</title>
       <link>https://emusk.cn/20261016.html</link>
@@ -472,18 +480,6 @@
       <category>OpenAI</category>
       <category>Starshield</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月01日</title>
-      <link>https://emusk.cn/20260601.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260601.html</guid>
-      <pubDate>Mon, 01 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月01日 外界紧盯我超8300亿美元的身价，预计SpaceX本月IPO后我将成首位万亿富翁。但这毫无意义，重点是筹集750亿资金加速火星计划。Grok-3与FSD的整合很完美。澳洲对X的罚款只是杂音。继续加速。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>火星计划</category>
-      <category>Grok</category>
-      <category>FSD</category>
     </item>
   </channel>
 </rss>
