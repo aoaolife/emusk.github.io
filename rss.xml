@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 19 Oct 2026 12:10:26 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 01:12:45 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月19日</title>
+      <link>https://emusk.cn/20261019.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261019.html</guid>
+      <pubDate>Mon, 19 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月19日 。星舰第12次试飞终于全员通过评审，今晚得喝点威士忌。Optimus在工厂拧螺丝比人快三倍，但学会偷懒了。xAI新模型写情诗比我还烂。火星窗口倒计时八个月，每天开会像打仗。刚发推说人类该走了，点赞破了千万。睡觉。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月18日</title>
       <link>https://emusk.cn/20261018.html</link>
@@ -464,17 +472,6 @@
       <category>IPO</category>
       <category>xAI</category>
       <category>Optimus</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月04日</title>
-      <link>https://emusk.cn/20260604.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260604.html</guid>
-      <pubDate>Thu, 04 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月04日 。英国首相斯塔默指责我制造分裂，但在言论自由上我绝不妥协。SpaceX下周将迎来历史性IPO，外界正疯狂炒作“首个万亿富翁”的头衔。这毫无意义。德州AI工厂和太空数据中心已启动。目标依然是火星，继续加速。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>言论自由</category>
       <category>火星计划</category>
     </item>
   </channel>
