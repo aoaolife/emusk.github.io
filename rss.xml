@@ -6,7 +6,23 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 20 Oct 2026 01:12:45 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 15:35:04 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月21日</title>
+      <link>https://emusk.cn/20261021.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261021.html</guid>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月21日 。今日Starship第15次试飞成功，回收精度再提升。Optimus产线爬坡顺利，FSD v14推送后用户反馈良好。xAI新模型训练中，算力仍是瓶颈。时间紧迫，继续推进。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月20日</title>
+      <link>https://emusk.cn/20261020.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261020.html</guid>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月20日 。星舰下一次试飞窗口定了，团队在 Starbase 通宵调试。今天看了 Optimus 新版本在工厂搬运的视频，动作比上代流畅。Neuralink 植入者增至五十人。时间不够用，但方向没错。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月19日</title>
       <link>https://emusk.cn/20261019.html</link>
@@ -449,30 +465,6 @@
       <category>Robotaxi</category>
       <category>Neuralink</category>
       <category>Grok</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月06日</title>
-      <link>https://emusk.cn/20260606.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260606.html</guid>
-      <pubDate>Sat, 06 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月06日 。 距离SpaceX的IPO仅剩一周，外界全在盯着1.8万亿估值和“首位万亿富翁”的噱头。但这毫无意义，资本只是把人类送上火星的燃料。我真正在意的是星舰的最新测试，以及xAI与十万张GPU算力的整合。时间窗口正在关闭，必须加速。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星舰</category>
-      <category>xAI</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月05日</title>
-      <link>https://emusk.cn/20260605.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260605.html</guid>
-      <pubDate>Fri, 05 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月05日 SpaceX的IPO正冲刺1.75万亿美元估值，今天在摩根大通会议上已明确新进展。xAI算力不能受限于传统电网，已敲定28亿美元自建燃气电站。英国首相斯塔默对我X言论的指责纯属无理取闹。年底要把Optimus送上火星，必须加速！</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>xAI</category>
-      <category>Optimus</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
