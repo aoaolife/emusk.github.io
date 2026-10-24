@@ -6,7 +6,31 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 22 Oct 2026 15:51:34 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 23:28:29 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月24日</title>
+      <link>https://emusk.cn/20261024.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261024.html</guid>
+      <pubDate>Sat, 24 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月24日 。星舰第12次试飞顺利回收，团队执行力惊人。特斯拉FSD v14在华获批，数据合规仍是硬仗。xAI新模型跑分领先，但算力瓶颈未解。火星窗口倒计时，下周开架构会。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月23日</title>
+      <link>https://emusk.cn/20261023.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261023.html</guid>
+      <pubDate>Fri, 23 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月23日 。星舰下次发射窗口临近，团队在最后复核。今夜与Neuralink工程师讨论植入精度，进展比预期快。AI监管仍是全球难题，我在X上又说了几句。火星时间表不变，多行星文明必须实现。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月22日</title>
+      <link>https://emusk.cn/20261022.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261022.html</guid>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月22日 。星舰第十二次试飞成功回收，团队很棒。AI5芯片量产爬坡顺利。今天只开了两个会，其余时间在工厂。火星窗口还有两年，必须更快。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月21日</title>
       <link>https://emusk.cn/20261021.html</link>
@@ -429,42 +453,6 @@
       <category>星链</category>
       <category>芯片</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月10日</title>
-      <link>https://emusk.cn/20260610.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260610.html</guid>
-      <pubDate>Wed, 10 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月10日 再过两天SpaceX将在纳斯达克挂牌。让人类成为多行星物种的愿景从未如此清晰。 xAI与SpaceX已整合并发布Grok 5模型。同时德州无人Robotaxi加速扩张，Optimus第三代量产顺利推进。 物理AI与星际探索的未来已至，继续工作。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>Grok</category>
-      <category>Robotaxi</category>
-      <category>Optimus</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月08日</title>
-      <link>https://emusk.cn/20260608.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260608.html</guid>
-      <pubDate>Mon, 08 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月08日 。 SpaceX将于12日IPO，星链用户破千万，这为火星计划储备了弹药。特斯拉FSD V14与Grok正同步推送。外界在炒作万亿富翁头衔，毫无意义。我只关心AI产能与星舰发射，让人类多行星化才是核心。继续工作。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星链</category>
-      <category>FSD</category>
-      <category>Grok</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月07日</title>
-      <link>https://emusk.cn/20260607.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260607.html</guid>
-      <pubDate>Sun, 07 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月07日 SpaceX将于12日IPO，万亿估值只是通往火星的燃料。xAI与Google算力协议已定，Grok V9即将上线。Tesla无人Robotaxi在奥斯汀落地，Neuralink迈入量产。尽管X仍在应对FTC，但一切都在全速推进。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>Robotaxi</category>
-      <category>Neuralink</category>
-      <category>Grok</category>
     </item>
   </channel>
 </rss>
