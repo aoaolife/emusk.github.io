@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 24 Oct 2026 23:33:09 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 23:22:23 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月25日</title>
+      <link>https://emusk.cn/20261025.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261025.html</guid>
+      <pubDate>Sun, 25 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月25日 星舰第二十次试飞刚刚落地，助推器回收干净利落。Optimus在工厂里自己组装自己，看得我有点恍惚。今晚和团队吃德州烤肉，聊火星窗口期，气氛很燃。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月24日</title>
       <link>https://emusk.cn/20261024.html</link>
@@ -440,18 +448,6 @@
       <category>IPO</category>
       <category>xAI</category>
       <category>星链</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月11日</title>
-      <link>https://emusk.cn/20260611.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260611.html</guid>
-      <pubDate>Thu, 11 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月11日 6月11日。 明天SpaceX将上市，估值两万亿美元。资金将用于星链和太空AI中心。 今天在ASML会上推进Terafab芯片厂，必须亲自解决算力瓶颈。 媒体炒作我将成首位万亿富翁。财富毫无意义，只是让人类跨向多行星文明的燃料。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星链</category>
-      <category>芯片</category>
       <category>火星计划</category>
     </item>
   </channel>
