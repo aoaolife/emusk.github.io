@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 25 Oct 2026 23:22:23 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 23:22:24 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月26日</title>
+      <link>https://emusk.cn/20261026.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261026.html</guid>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月26日 星舰第14次试飞成功，热分离干净利落。上午听Optimus团队汇报产线进展，手部自由度仍是瓶颈。下午和xAI讨论Grok 5训练数据配比。日程太满，久未陪孩子。得改。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月25日</title>
       <link>https://emusk.cn/20261025.html</link>
@@ -437,18 +445,6 @@
       <category>FSD</category>
       <category>Robotaxi</category>
       <category>星舰</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月12日</title>
-      <link>https://emusk.cn/20260612.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260612.html</guid>
-      <pubDate>Fri, 12 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月12日 ，星际基地。 SpaceX今日敲钟上市，创历史最大IPO。媒体狂欢我成为首位万亿富翁，但财富只是让人类成为多行星物种的燃料。xAI已顺利并入，下一步是建设轨道AI数据中心与十万颗星链。一切账面数字都毫无意义，火星才是我们真正的征途。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>xAI</category>
-      <category>星链</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
