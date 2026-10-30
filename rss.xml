@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 26 Oct 2026 23:22:24 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 23:22:22 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月30日</title>
+      <link>https://emusk.cn/20261030.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261030.html</guid>
+      <pubDate>Fri, 30 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月30日 FSD V14在华获批，星舰完成年度第七飞。脑机接口让渐冻症患者用思维发了一条推文。今天很忙，但值得。人类正加速走向多行星文明。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月26日</title>
       <link>https://emusk.cn/20261026.html</link>
@@ -433,18 +441,6 @@
       <category>星链</category>
       <category>xAI</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月13日</title>
-      <link>https://emusk.cn/20260613.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260613.html</guid>
-      <pubDate>Sat, 13 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月13日 昨天SpaceX成功IPO，外界都在热议我成为世界首位万亿富翁。但这不过是虚幻的账面数字。今天FSD v14.3.4开始推送，Robotaxi在内华达州的许可稳步推进。庞大的资金绝非终点，而是星舰研发与火星殖民的燃料。让人类成为多行星物种才是唯一目标。继续工作。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>FSD</category>
-      <category>Robotaxi</category>
-      <category>星舰</category>
     </item>
   </channel>
 </rss>
