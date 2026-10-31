@@ -6,7 +6,7 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 31 Oct 2026 23:24:40 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 23:26:27 +0800</lastBuildDate>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月31日</title>
       <link>https://emusk.cn/20261031.html</link>
@@ -21,6 +21,14 @@
       <guid isPermaLink="true">https://emusk.cn/20261030.html</guid>
       <pubDate>Fri, 30 Oct 2026 00:00:00 +0800</pubDate>
       <description>2026年10月30日 FSD V14在华获批，星舰完成年度第七飞。脑机接口让渐冻症患者用思维发了一条推文。今天很忙，但值得。人类正加速走向多行星文明。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月27日</title>
+      <link>https://emusk.cn/20261027.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261027.html</guid>
+      <pubDate>Tue, 27 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月27日 SpaceX敲定400亿美元GPU融资，数百家小型云厂商将在洗牌中倒闭。高压推进星舰与AI基础设施让我自嘲患上了“赛博精神病”，但为了火星与意识的延续，核心引擎必须保持超频。今晚睡在工厂地板上。</description>
       <category>马斯克中文日记</category>
     </item>
     <item>
@@ -425,18 +433,6 @@
       <category>月球基地</category>
       <category>Optimus</category>
       <category>xAI</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月15日</title>
-      <link>https://emusk.cn/20260615.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260615.html</guid>
-      <pubDate>Mon, 15 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月15日 。 SpaceX的IPO只是手段，外界炒作的“首位万亿富翁”头衔毫无意义，我的目标只有火星。这笔资金将直接转化为星舰舰队，让人类真正成为多行星物种。此外，奥斯汀TeraFab工厂正全速推进以打破AI算力瓶颈。时间紧迫。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星舰</category>
-      <category>芯片</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
