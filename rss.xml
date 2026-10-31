@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 31 Oct 2026 01:53:49 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 23:24:40 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月31日</title>
+      <link>https://emusk.cn/20261031.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261031.html</guid>
+      <pubDate>Sat, 31 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月31日 星舰第十二次试飞终于成功入轨并回收，这是团队了不起的胜利。Neuralink的新植入体临床试验数据好于预期。夜里仍在审阅德州新厂的产能方案，时间永远是最稀缺的资源。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月30日</title>
       <link>https://emusk.cn/20261030.html</link>
@@ -428,18 +436,6 @@
       <category>IPO</category>
       <category>星舰</category>
       <category>芯片</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月14日</title>
-      <link>https://emusk.cn/20260614.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260614.html</guid>
-      <pubDate>Sun, 14 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月14日 。 前天成为首位万亿富翁毫无意义，SpaceX历史性的IPO及2.1万亿美元估值才是重点。新部署的星链“轨道数据中心”将让xAI在算力上彻底碾压对手。无视地球上的无聊非议，我积累巨款只有一个目的：建造火星城市，让人类多行星化。</description>
-      <category>SpaceX</category>
-      <category>IPO</category>
-      <category>星链</category>
-      <category>xAI</category>
       <category>火星计划</category>
     </item>
   </channel>
