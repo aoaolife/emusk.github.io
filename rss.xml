@@ -6,7 +6,7 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 31 Oct 2026 23:26:27 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 23:29:31 +0800</lastBuildDate>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月31日</title>
       <link>https://emusk.cn/20261031.html</link>
@@ -21,6 +21,22 @@
       <guid isPermaLink="true">https://emusk.cn/20261030.html</guid>
       <pubDate>Fri, 30 Oct 2026 00:00:00 +0800</pubDate>
       <description>2026年10月30日 FSD V14在华获批，星舰完成年度第七飞。脑机接口让渐冻症患者用思维发了一条推文。今天很忙，但值得。人类正加速走向多行星文明。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月29日</title>
+      <link>https://emusk.cn/20261029.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261029.html</guid>
+      <pubDate>Thu, 29 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月29日 特斯拉与SpaceX的特别委员会已在评估合并。华尔街在纠结资本开支，但他们不懂第一性原理：从Grok、Optimus到星舰，唯有打通AI与物理世界闭环，才能让人类成为多行星物种。我回避了谈判，但大势已定。阻力不过是噪音。</description>
+      <category>马斯克中文日记</category>
+    </item>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年10月28日</title>
+      <link>https://emusk.cn/20261028.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261028.html</guid>
+      <pubDate>Wed, 28 Oct 2026 00:00:00 +0800</pubDate>
+      <description>2026年10月28日 普京的称赞和华盛顿的政治杂音都不重要。传统电信巨头觉得Starlink做不成全美移动网络，就像当年他们觉得火箭不能回收一样。SpaceX三季度营收已经说明问题。地面上的噪音毫无意义，唯有物理学与第一性原理永恒。继续推进星舰，火星见。</description>
       <category>马斯克中文日记</category>
     </item>
     <item>
@@ -409,30 +425,6 @@
       <category>自动驾驶</category>
       <category>监管</category>
       <category>特斯拉</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月17日</title>
-      <link>https://emusk.cn/20260617.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260617.html</guid>
-      <pubDate>Wed, 17 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月17日 今天在星际基地审查了猛禽引擎数据。星舰必须在年底前实现完全回收，火星的时间窗口不等人，FAA的监管拖延依然荒谬。 下午视察了德州工厂的擎天柱产线，xAI算力集群运行完美。进度还是太慢，让人类成为多行星物种是唯一的出路。必须加速。</description>
-      <category>星舰</category>
-      <category>猛禽发动机</category>
-      <category>Optimus</category>
-      <category>xAI</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年06月16日</title>
-      <link>https://emusk.cn/20260616.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260616.html</guid>
-      <pubDate>Tue, 16 Jun 2026 00:00:00 +0800</pubDate>
-      <description>2026年06月16日 在博卡奇卡监督星舰轨道加注测试，数据超出预期。为加快迭代，我们将重心转向建设“阿尔法月球基地”。火星计划虽有推迟，但这是实现多行星文明最稳妥的路径。下午视察得州工厂，Optimus机器人的灵活性已大幅提升，xAI集群也正在全速运转。没时间休息，继续前进。</description>
-      <category>星舰</category>
-      <category>在轨加注</category>
-      <category>月球基地</category>
-      <category>Optimus</category>
-      <category>xAI</category>
     </item>
   </channel>
 </rss>
