@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 31 Oct 2026 23:29:31 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 23:22:21 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月01日</title>
+      <link>https://emusk.cn/20261101.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261101.html</guid>
+      <pubDate>Sun, 01 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月01日 星舰第十二次试飞刚完成，热分离干净利落。开会到凌晨，盯着轨道加注的数据曲线。Optimus产线良率还欠三个点，明天得去车间。火星窗口倒计时，没时间庆功。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年10月31日</title>
       <link>https://emusk.cn/20261031.html</link>
@@ -414,17 +422,6 @@
       <category>在轨加注</category>
       <category>Optimus</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月09日</title>
-      <link>https://emusk.cn/20260909.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260909.html</guid>
-      <pubDate>Wed, 09 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月09日 奥斯汀的Cybercab已驶入现实，监管调查也随之而来。争议只是噪声，工程必须继续。让汽车自己驾驶，让火箭更频繁升空，让文明拥有第二个家园。怀疑声只是燃料。（虚构拟写）</description>
-      <category>Cybercab</category>
-      <category>自动驾驶</category>
-      <category>监管</category>
-      <category>特斯拉</category>
     </item>
   </channel>
 </rss>
