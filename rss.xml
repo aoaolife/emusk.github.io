@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 01 Nov 2026 23:22:21 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 23:22:29 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月02日</title>
+      <link>https://emusk.cn/20261102.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261102.html</guid>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月02日 星舰下一次整合测试已排期，FSD在几个新城市落地。今天开了几场会，重点还是把成本压下来、把迭代拉快。多行星文明不是口号，是每周的进度条。继续干。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月01日</title>
       <link>https://emusk.cn/20261101.html</link>
@@ -410,17 +418,6 @@
       <category>无聊公司</category>
       <category>融资</category>
       <category>X</category>
-      <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月10日</title>
-      <link>https://emusk.cn/20260910.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260910.html</guid>
-      <pubDate>Thu, 10 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月10日 星舰在博卡奇卡的发射架上完成低温加注测试。火星发射窗口越来越近，在轨推进剂转移的每一步都必须严格遵循物理第一性原理。擎天柱产线也在同步提速。深夜两点站在星港，仰望夜空，人类成为多行星物种的倒计时容不得任何迟疑。</description>
-      <category>星舰</category>
-      <category>在轨加注</category>
-      <category>Optimus</category>
       <category>火星计划</category>
     </item>
   </channel>
