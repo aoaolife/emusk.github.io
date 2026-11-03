@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 02 Nov 2026 23:22:29 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 23:23:40 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月03日</title>
+      <link>https://emusk.cn/20261103.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261103.html</guid>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月03日 今天盯着星舰新一批隔热瓦的检测数据，合格率比预期高。FSD在欧洲又过了一国审批。晚上和团队聊了十分钟火星窗口期，然后签了两份工厂扩产文件。忙，但方向清楚。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月02日</title>
       <link>https://emusk.cn/20261102.html</link>
@@ -408,17 +416,6 @@
       <category>xAI</category>
       <category>Cybercab</category>
       <category>人工智能</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月11日</title>
-      <link>https://emusk.cn/20260911.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260911.html</guid>
-      <pubDate>Fri, 11 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月11日 清晨在工厂。Boring刚拿到30亿美元融资，地下管网的掘进速度还需翻倍。今天X完成了创作者旧收益的最终结算，平台将全面倒向原创激励。九一一总让人意识到文明有多脆弱，火星窗口期正步步逼近，唯有极致的工程推进能延续意识之火。</description>
-      <category>无聊公司</category>
-      <category>融资</category>
-      <category>X</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
