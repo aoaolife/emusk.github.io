@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 03 Nov 2026 23:23:40 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 23:24:44 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月04日</title>
+      <link>https://emusk.cn/20261104.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261104.html</guid>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月04日 今天批了星舰V4的第三次回收，终于稳了。AI5芯片流片回来，功耗比预期低两成。晚上和团队过了一遍火星窗口方案，2028年无人货运先走。忙完看眼X，又有人骂我。习惯了。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月03日</title>
       <link>https://emusk.cn/20261103.html</link>
@@ -405,17 +413,6 @@
       <category>Optimus</category>
       <category>FSD</category>
       <category>火星计划</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月12日</title>
-      <link>https://emusk.cn/20260912.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260912.html</guid>
-      <pubDate>Sat, 12 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月12日 Grok 4.7正在进行最后的权重校准与发布部署，xAI团队的推进速度令人振奋。至于好莱坞那些胡编乱造的纪录片与法律杂音，根本不值一驳，唯有扎实的硬核工程才是对抹黑最好的回击。从Cybercab到认知智能，我们必须全力加速人类文明的进程。</description>
-      <category>Grok</category>
-      <category>xAI</category>
-      <category>Cybercab</category>
-      <category>人工智能</category>
     </item>
   </channel>
 </rss>
