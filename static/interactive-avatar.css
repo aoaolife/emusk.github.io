@@ -1,10 +1,126 @@
-/* aoao_DOMAIN = "WEB"; aoao_TOOL = "interactive_avatar"; aoao_SUMMARY = "侧栏互动头像样式"; */
-.avatar-card { padding: 12px; overflow: hidden; }
-.interactive-avatar { position: relative; width: 100%; aspect-ratio: 1 / 1.12; overflow: hidden; isolation: isolate; cursor: grab; touch-action: none; }
-.interactive-avatar:active { cursor: grabbing; }
-.interactive-avatar .circle { position: absolute; width: 90%; aspect-ratio: 1; left: 5%; bottom: 5%; border-radius: 50%; background: #1d9bf0; }
-#avatar-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.avatar-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.interactive-avatar:not(.no-webgl) .avatar-fallback { visibility: hidden; }
-.interactive-avatar.no-webgl #avatar-canvas { display: none; }
-.avatar-status { margin: 8px 0 0; color: #657786; font-size: 12px; line-height: 1.5; text-align: center; }
+/* aoao_DOMAIN = "WEB"; aoao_TOOL = "apb"; aoao_SUMMARY = "侧栏和关于页动态头像样式"; */
+.avatar-card { padding: 24px 18px; overflow: visible; }
+.avatar-card .apb-avatar-caption {
+  margin: 24px 0 0;
+  color: #8b98a5;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+.about-avatar { width: min(280px, 70vw); margin: 32px auto 40px; }
+.about-avatar .avatar-card { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.apb-portrait-wrap:focus-visible { outline: 2px solid #1d9bf0; outline-offset: 5px; border-radius: 50%; }
+.apb-portrait-scene {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 50%;
+  background: #1d9bf0;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 11px #ffffff75,
+    0 0 0 12px #dce5ed;
+}
+.apb-portrait-scene.is-demo-active {
+  overflow: visible;
+  z-index: 1;
+}
+.apb-portrait-wrap {
+  position: absolute;
+  width: 126%;
+  aspect-ratio: 1;
+  left: -13%;
+  top: -13%;
+  touch-action: pan-y;
+  --tilt: 0deg;
+  transform: rotate(var(--tilt));
+  transition: transform 0.3s ease-out;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.apb-portrait-wrap.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+.apb-portrait-wrap .portrait-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.apb-portrait-wrap .face-canvas {
+  position: absolute;
+  left: -35%;
+  top: -35%;
+  width: 170%;
+  height: 170%;
+  pointer-events: none;
+  visibility: hidden;
+}
+.apb-portrait-wrap .portrait-demo-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.apb-portrait-wrap .portrait-demo-cursor svg {
+  position: absolute;
+  width: 24px;
+  height: 27px;
+  overflow: visible;
+  fill: #fff;
+  stroke: #162332;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 2px 2px #0f243a42);
+}
+.apb-portrait-wrap .demo-hand-open {
+  left: -8.25px;
+  top: -1.5px;
+}
+.apb-portrait-wrap .demo-hand-closed {
+  display: none;
+  left: -10.5px;
+  top: -9.75px;
+}
+.apb-portrait-wrap .portrait-demo-cursor .demo-finger-line {
+  fill: none;
+  stroke-width: 1.1;
+}
+.apb-portrait-wrap .portrait-demo-cursor[data-pressed="true"] .demo-hand-open {
+  display: none;
+}
+.apb-portrait-wrap .portrait-demo-cursor[data-pressed="true"] .demo-hand-closed {
+  display: block;
+}
+.apb-portrait-wrap .demo-grip-ring {
+  display: none;
+  position: absolute;
+  left: -7px;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #1d9bf08c;
+  border-radius: 50%;
+  background: #1d9bf015;
+}
+.apb-portrait-wrap .portrait-demo-cursor[data-pressed="true"] .demo-grip-ring {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .apb-portrait-wrap { transition: none; }
+}
