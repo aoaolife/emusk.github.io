@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 05 Nov 2026 08:39:19 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 23:24:46 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月05日</title>
+      <link>https://emusk.cn/20261105.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261105.html</guid>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月05日 星舰第十二飞终于入轨，助推器回收干净利落。FSD v14在华获批，特斯拉股价新高。Optimus产线提速，明年量产目标不变。AI5芯片流片成功。唯一遗憾：火星窗口还得再等两年。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月04日</title>
       <link>https://emusk.cn/20261104.html</link>
@@ -401,18 +409,6 @@
       <category>Optimus</category>
       <category>火星计划</category>
       <category>火箭回收</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月13日</title>
-      <link>https://emusk.cn/20260913.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260913.html</guid>
-      <pubDate>Sun, 13 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月13日 星舰通往火星的发射窗口期越来越近，在星舰基地盯了一整夜猛禽发动机的推力数据与热防护瓦。擎天柱在产线上的装配节拍终于提速，但无人监督FSD的全面推进仍充满阻碍。意识的火种必须成为多行星物种，时间不多了，继续干活。</description>
-      <category>星舰</category>
-      <category>猛禽发动机</category>
-      <category>Optimus</category>
-      <category>FSD</category>
-      <category>火星计划</category>
     </item>
   </channel>
 </rss>
