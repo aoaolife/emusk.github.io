@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 05 Nov 2026 23:24:46 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 23:23:54 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月06日</title>
+      <link>https://emusk.cn/20261106.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261106.html</guid>
+      <pubDate>Fri, 06 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月06日 2026年11月6日 中期选举后，特斯拉和 SpaceX 股价连续下跌，市场担心监管趋严。路透社 波动是现实。明天继续解决工程问题，让产品说话。 以上为基于公开报道的虚构日记。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月05日</title>
       <link>https://emusk.cn/20261105.html</link>
@@ -398,17 +406,6 @@
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0800</pubDate>
       <description>2026年09月15日 星舰第12次试飞终于完全成功，热分离与回收均无瑕疵。团队今晚在星基地庆祝，我喝了一罐可乐。脑机接口获准临床，但距量产仍远。火星，明年见。</description>
       <category>马斯克2026年日程日记</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月14日</title>
-      <link>https://emusk.cn/20260914.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260914.html</guid>
-      <pubDate>Mon, 14 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月14日 ，星舰第15次试飞终于成功回收。火星窗口临近， Optimus 开始量产。今天很累，但人类离多行星物种又近了一步。</description>
-      <category>星舰</category>
-      <category>Optimus</category>
-      <category>火星计划</category>
-      <category>火箭回收</category>
     </item>
   </channel>
 </rss>
