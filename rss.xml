@@ -6,7 +6,15 @@
     <description>aoao.life 最新文章订阅</description>
     <language>zh-CN</language>
     <atom:link href="https://emusk.cn/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 07 Nov 2026 21:12:39 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 23:22:42 +0800</lastBuildDate>
+    <item>
+      <title>大家好，我是马斯克，今天是2026年11月07日</title>
+      <link>https://emusk.cn/20261107.html</link>
+      <guid isPermaLink="true">https://emusk.cn/20261107.html</guid>
+      <pubDate>Sat, 07 Nov 2026 00:00:00 +0800</pubDate>
+      <description>2026年11月07日 星舰第12次试飞终于全流程成功，回收精度超出预期。今晚和团队简单庆祝，随后继续推进V4发动机迭代。火星窗口倒计时，时间不多了。</description>
+      <category>马斯克中文日记</category>
+    </item>
     <item>
       <title>大家好，我是马斯克，今天是2026年11月06日</title>
       <link>https://emusk.cn/20261106.html</link>
@@ -398,14 +406,6 @@
       <pubDate>Wed, 16 Sep 2026 00:00:00 +0800</pubDate>
       <description>2026年09月16日 。星舰第十二次试飞终于完全成功，助推器和飞船都精准溅落。团队今晚在星港开了香槟。AI5芯片提前流片，FSD事故率再降一个量级。明天继续审火星城市蓝图。</description>
       <category>马斯克中文日记</category>
-    </item>
-    <item>
-      <title>大家好，我是马斯克，今天是2026年09月15日</title>
-      <link>https://emusk.cn/20260915.html</link>
-      <guid isPermaLink="true">https://emusk.cn/20260915.html</guid>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0800</pubDate>
-      <description>2026年09月15日 星舰第12次试飞终于完全成功，热分离与回收均无瑕疵。团队今晚在星基地庆祝，我喝了一罐可乐。脑机接口获准临床，但距量产仍远。火星，明年见。</description>
-      <category>马斯克2026年日程日记</category>
     </item>
   </channel>
 </rss>
